@@ -50,7 +50,7 @@ const CardExperience = ({ item, defaultOpen = false }) => {
         </div>
 
         <button
-          className={`w-6 h-6 text-[#999999] border-2 border-[#999999] rounded-full flex items-center justify-center text-[22px] leading-none transition-transform duration-300 ${
+          className={`w-6 h-6 text-[#999999] shrink-0 border-2 border-[#999999] rounded-full flex items-center justify-center text-[22px] leading-none transition-transform duration-300 ${
             isOpen ? "rotate-45" : "rotate-0"
           }`}
           aria-label="Toggle details"
