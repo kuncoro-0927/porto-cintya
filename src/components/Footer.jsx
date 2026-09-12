@@ -38,7 +38,7 @@ const Footer = () => {
       <div className="mt-16 mb-6 border-t border-white/20"></div>
       <div className="flex flex-col gap-3 lg:flex-row items-start lg:items-center justify-between">
         <span className="text-[#6c6c6c] text-sm">
-          ©Kkuncoro 2026. All rights reserved.
+          ©Cintya 2026. All rights reserved.
         </span>
         <span className="text-[#6c6c6c] text-sm">
           Design and crafted with passion

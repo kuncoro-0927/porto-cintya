@@ -13,7 +13,7 @@ const Contact = () => {
           I’m always open to new ideas, collaborations, or a simple conversation
         </h2>
       </div>
-      <div className="grid grid-cols-2 w-full mt-10 lg:mt-0 justify-between gap-3 ">
+      <div className="grid grid-cols-2 w-full lg:w-fit mt-10 lg:mt-0 justify-between gap-3 ">
         <div className="group flex h-[180px] w-full lg:w-[265px] items-center justify-center rounded-2xl bg-[#eeeeee] transition-colors duration-300 hover:bg-purple-800 cursor-pointer">
           <FaInstagram className="text-5xl text-[#6c6c6c] transition-colors duration-300 group-hover:text-white" />
         </div>

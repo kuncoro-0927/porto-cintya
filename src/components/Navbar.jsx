@@ -157,7 +157,7 @@ const Navbar = () => {
           {menuOpen && (
             <div
               ref={menuRef}
-              className="absolute right-0 top-[calc(100%+12px)] z-50 w-72 rounded-3xl bg-white p-3 shadow-2xl"
+              className="absolute right-0 top-[calc(100%+12px)] mt-4 z-50 w-72 rounded-3xl bg-white p-3 shadow-2xl"
               style={{ opacity: 0 }}
             >
               <div className="flex flex-col gap-2">
@@ -183,10 +183,12 @@ const Navbar = () => {
                 })}
 
                 <button
+                  ref={(el) => (itemsRef.current[navLinks.length] = el)}
                   onClick={closeMenu}
+                  style={{ opacity: 0 }}
                   className="mt-1 flex items-center justify-center gap-2 rounded-2xl bg-gray-100 p-4 text-base font-semibold text-black transition duration-300 hover:bg-gray-200"
                 >
-                  Contact Me
+                  Email Me
                 </button>
               </div>
             </div>
