@@ -3,9 +3,9 @@ import profile from "../assets/images/profile-cintya.jpeg";
 
 const Marquee = () => {
   return (
-    <section className="lg:relative mx-6 lg:mx-20 lg:py-60 mt-20 lg:mt-0">
+    <section className="md:relative mx-6 sm:mx-20 md:mx-20 md:py-40 lg:py-60 mt-20 lg:mt-0 2xl:mx-40">
       {/* Area marquee - disembunyikan di mobile */}
-      <div className="relative hidden overflow-hidden lg:block">
+      <div className="relative hidden overflow-hidden md:block">
         <MarqueeAnimation />
 
         {/* Fade kiri */}
@@ -16,11 +16,11 @@ const Marquee = () => {
       </div>
 
       {/* Foto - DIAM & boleh keluar dari area marquee */}
-      <div className="pointer-events-none lg:absolute lg:left-1/2 lg:top-1/2 z-40 w-full lg:w-[400px] lg:-translate-x-1/2 lg:-translate-y-1/2">
+      <div className="pointer-events-none md:absolute md:left-1/2 md:top-1/2 z-40 w-full md:w-[400px] md:-translate-x-1/2 md:-translate-y-1/2">
         <img
           src={profile}
           alt=""
-          className="w-full lg:h-[550px] object-cover rounded-4xl shadow-2xl"
+          className="w-full md:h-[550px] object-cover rounded-4xl shadow-2xl"
         />
       </div>
     </section>

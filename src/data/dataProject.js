@@ -1,7 +1,7 @@
 import dashboard_1 from "../assets/images/projects/dashboard/dashboard-1-bank-campaign.png";
 import dashboard_2 from "../assets/images/projects/dashboard/dashboard-2-airbnb.png";
 import dashboard_3 from "../assets/images/projects/dashboard/dashboard-3.png";
-const projects = [
+const defaultProjects = [
   {
     id: 1,
     category: "Dashboard",
@@ -157,4 +157,4 @@ const projects = [
   },
 ];
 
-export default projects;
+export default defaultProjects;

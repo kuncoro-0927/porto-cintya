@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import CardProject from "../components/CardProject";
 import { NavLink } from "react-router-dom";
-import projects from "../data/dataProject";
+import defaultProjects from "../data/dataProject";
+import { getProjects } from "../services/projectService";
 import logoR from "../assets/images/software/Rlogo.svg";
 import logoPython from "../assets/images/software/Python-logo-notext.svg";
 import logoTableau from "../assets/images/software/Tableau Icon - Colored - zonalogo.com.svg";
@@ -18,6 +19,8 @@ const Projects = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [showAllMobile, setShowAllMobile] = useState(false);
+  const [projects, setProjects] = useState(defaultProjects);
+
   const scrollRef = useRef(null);
 
   const filteredProjects = projects.filter(
@@ -51,9 +54,23 @@ const Projects = () => {
 
   const showNextButton = !canScrollLeft && canScrollRight;
 
+  useEffect(() => {
+    async function fetchProjects() {
+      const data = await getProjects();
+
+      console.log("HASIL DI PROJECTS:", data);
+
+      if (data.length > 0) {
+        setProjects(data);
+      }
+    }
+
+    fetchProjects();
+  }, []);
+
   return (
     <section className="mt-20 lg:mt-0 lg:py-40 flex flex-col justify-center">
-      <div className="flex justify-between items-end w-full px-5 lg:px-20">
+      <div className="flex justify-between items-end w-full px-5 sm:px-20 lg:px-20 2xl:px-40">
         <div className="justify-start items-start flex flex-col">
           <div className="border border-amber-800 text-amber-800 rounded-full px-4 py-2 w-fit">
             Projects
@@ -82,7 +99,7 @@ const Projects = () => {
         </div>
 
         {/* Tombol next cuma ada gunanya di desktop (scroll horizontal) */}
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-3">
           <button
             onClick={scrollToNext}
             className={`z-40 bg-transparent text-black border border-black rounded-full h-10 w-10 transition-opacity duration-300 ${
@@ -96,7 +113,7 @@ const Projects = () => {
 
       <div className="mt-12">
         {/* ===== MOBILE: list vertikal + show more ===== */}
-        <div className="lg:hidden px-5">
+        <div className="md:hidden px-6 sm:px-20">
           <div className="flex flex-col gap-3">
             {mobileProjects.map((project) => (
               <NavLink
@@ -108,7 +125,7 @@ const Projects = () => {
                   title={project.title}
                   year={project.year}
                   software={project.software}
-                  image={project.image}
+                  image={project.image || project.image_url}
                 />
               </NavLink>
             ))}
@@ -125,7 +142,7 @@ const Projects = () => {
         </div>
 
         {/* ===== DESKTOP: scroll horizontal semua item ===== */}
-        <div className="relative mx-20 hidden lg:block">
+        <div className="relative mx-20 2xl:mx-40 hidden md:block">
           <div className="relative overflow-hidden">
             <div
               ref={scrollRef}
@@ -136,13 +153,13 @@ const Projects = () => {
                 <NavLink
                   key={project.id}
                   to={`/project/${project.slug}`}
-                  className="snap-start shrink-0 w-[calc((100%-1.5rem)/3)]"
+                  className="snap-start shrink-0 md:w-[calc((100%-1.5rem)/1.5)] lg:w-[calc((100%-1.5rem)/3)]"
                 >
                   <CardProject
                     title={project.title}
                     year={project.year}
                     software={project.software}
-                    image={project.image}
+                    image={project.image || project.image_url}
                   />
                 </NavLink>
               ))}
@@ -162,7 +179,7 @@ const Projects = () => {
         </div>
       </div>
 
-      <div className="px-5 lg:px-20 pt-10 lg:pt-20 flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0">
+      <div className="px-5 sm:px-20 lg:px-20 2xl:px-40 pt-10 lg:pt-20 flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0">
         <div className="flex flex-col">
           <h2 className="text-2xl lg:text-4xl font-medium max-w-sm mt-5 mb-3 text-left">
             Supporting software for my work

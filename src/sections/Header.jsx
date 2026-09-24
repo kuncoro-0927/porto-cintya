@@ -2,8 +2,8 @@ import { FaLinkedin } from "react-icons/fa";
 
 const Header = () => {
   return (
-    <header className="px-6">
-      <div className=" flex flex-col gap-5 justify-center items-center text-center mt-40">
+    <header className="px-6 sm:px-20 lg:p-20 lg:mt-20 2xl:px-40">
+      <div className=" flex flex-col gap-5 justify-center items-center text-center">
         <h1 className="font-semibold text-4xl lg:text-6xl max-w-4xl">
           <span className="text-[#6c6c6c] leading-tight">
             Hi, I'm Cintya Kusuma

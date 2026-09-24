@@ -9,6 +9,10 @@ const Contact = lazy(() => import("./sections/Contact"));
 const Footer = lazy(() => import("./components/Footer"));
 import Navbar from "./components/Navbar";
 import SmoothScroll from "./components/SmoothScroll";
+
+// admin
+import AdminLogin from "./pages/admin/auth/loginAdmin";
+import Admin from "./pages/admin/dashboard/adminDashboard";
 export default function App() {
   return (
     <Routes>
@@ -47,6 +51,8 @@ export default function App() {
           </div>
         }
       />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   );
 }

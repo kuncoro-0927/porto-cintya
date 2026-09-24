@@ -91,7 +91,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 z-50 flex w-full items-center justify-between px-4 py-3 text-sm transition-all duration-300 lg:px-10 ${
+        className={`fixed top-0 left-0 z-50 flex w-full items-center justify-between px-4 sm:px-10 lg:px-10 2xl:px-32 py-3 text-sm transition-all duration-300 ${
           scrolled ? " bg-white/80 backdrop-blur-lg" : "bg-transparent"
         }`}
       >
@@ -108,7 +108,7 @@ const Navbar = () => {
         </div>
 
         {/* Navigation desktop */}
-        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center text-base md:flex font-medium">
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center text-base lg:flex font-medium">
           <div className="flex items-center gap-7">
             <a
               href="#about"

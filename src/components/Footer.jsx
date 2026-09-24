@@ -2,7 +2,7 @@ import profile from "../assets/images/profile-cintya.jpeg";
 
 const Footer = () => {
   return (
-    <footer className="px-6 py-10 lg:p-20 flex flex-col  bg-black text-white">
+    <footer className="px-6 sm:p-20 py-10 lg:p-20 2xl:px-40 flex flex-col  bg-black text-white">
       <div className="flex flex-col lg:flex-row items-stretch justify-between">
         <div>
           <div className="bg-white/20 p-1 w-fit rounded-md">

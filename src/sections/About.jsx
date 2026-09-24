@@ -1,7 +1,7 @@
 const About = () => {
   return (
-    <section className="px-6 lg:px-20 flex flex-col lg:flex-row gap-3 items-stretch bg-gray-100 mt-20 py-6 lg:mt-0 lg:py-40">
-      <div className="flex flex-col justify-between max-w-sm bg-black text-white p-6 rounded-3xl shadow-2xl shadow-black">
+    <section className="p-6 sm:p-20 lg:p-20 lg:py-40 2xl:px-40 flex flex-col lg:flex-row gap-3 items-stretch bg-gray-100 mt-20 lg:mt-0">
+      <div className="flex flex-col justify-between w-full lg:max-w-sm bg-black text-white p-6 rounded-3xl shadow-2xl shadow-black">
         <div className="flex flex-col gap-3">
           <span className="font-medium text-2xl">I'm Cintya Kusuma</span>
           <p className="text-[#a6a6a6] text-base font-medium">
