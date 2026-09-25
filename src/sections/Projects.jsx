@@ -125,7 +125,7 @@ const Projects = () => {
                   title={project.title}
                   year={project.year}
                   software={project.software}
-                  image={project.image || project.image_url}
+                  image={project.image_url || project.image}
                 />
               </NavLink>
             ))}
@@ -159,7 +159,7 @@ const Projects = () => {
                     title={project.title}
                     year={project.year}
                     software={project.software}
-                    image={project.image || project.image_url}
+                    image={project.image_url || project.image}
                   />
                 </NavLink>
               ))}

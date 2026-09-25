@@ -1,22 +1,18 @@
 import { useState } from "react";
 import { supabase } from "../../../../../lib/supabaseClient";
-const UpdateProject = ({ project, onSuccess, onClose }) => {
-  const [form, setForm] = useState({
-    category: project.category || "",
-    title: project.title || "",
-    subtitle: project.subtitle || "",
-    year: project.year || "",
-    event: project.event || "",
-    bullets: project.bullets?.join("\n") || "",
-    software: project.software || "",
-  });
-
+const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
   const [imageFile, setImageFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState(project.image_url || null);
-  const [categoryOpen, setCategoryOpen] = useState(false);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
-  const categories = ["Data Analysis", "Dashboard", "Infographics"];
-  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    category: "",
+    role: "",
+    company: "",
+    period: "",
+    bullets: "",
+    image_url: "",
+  });
 
   const handleChange = (e) => {
     setForm({
@@ -28,61 +24,51 @@ const UpdateProject = ({ project, onSuccess, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoading(true);
+    if (!imageFile) {
+      alert("Pilih gambar terlebih dahulu");
+      return;
+    }
+
+    if (imageFile && imageFile.size > 100 * 1024) {
+      alert("Ukuran gambar maksimal 100 KB");
+      return;
+    }
+
+    setUploading(true);
 
     try {
-      let imageUrl = project.image_url;
+      const fileExt = imageFile.name.split(".").pop();
+      const fileName = `${Date.now()}.${fileExt}`;
 
-      // Upload gambar baru jika user memilih gambar
-      if (imageFile) {
-        const fileExt = imageFile.name.split(".").pop();
-        const fileName = `${Date.now()}.${fileExt}`;
+      const { error: uploadError } = await supabase.storage
+        .from("work-experiences")
+        .upload(fileName, imageFile);
 
-        const { error: uploadError } = await supabase.storage
-          .from("projects")
-          .upload(fileName, imageFile);
-
-        if (uploadError) {
-          throw uploadError;
-        }
-
-        const { data: publicUrlData } = supabase.storage
-          .from("projects")
-          .getPublicUrl(fileName);
-
-        imageUrl = publicUrlData.publicUrl;
+      if (uploadError) {
+        throw uploadError;
       }
-
-      if (imageFile && imageFile.size > 2 * 1024 * 1024) {
-        alert("Ukuran gambar maksimal 2 MB");
-        return;
-      }
-
-      const slug = form.title
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9\s-]/g, "")
-        .replace(/\s+/g, "-");
 
       const bullets = form.bullets
         .split("\n")
         .map((item) => item.trim())
         .filter(Boolean);
 
-      const { error } = await supabase
-        .from("projects")
-        .update({
+      const { data: publicUrlData } = supabase.storage
+        .from("work-experiences")
+        .getPublicUrl(fileName);
+
+      const imageUrl = publicUrlData.publicUrl;
+
+      const { error } = await supabase.from("work_experiences").insert([
+        {
           category: form.category,
-          title: form.title,
-          slug: slug,
-          subtitle: form.subtitle,
-          year: form.year,
-          event: form.event,
+          role: form.role,
+          company: form.company,
+          period: form.period,
           bullets: bullets,
-          software: form.software,
-          image_url: imageUrl,
-        })
-        .eq("id", project.id);
+          logo_url: imageUrl,
+        },
+      ]);
 
       if (error) {
         throw error;
@@ -93,14 +79,15 @@ const UpdateProject = ({ project, onSuccess, onClose }) => {
       console.error(error);
       alert(error.message);
     } finally {
-      setLoading(false);
+      setUploading(false);
     }
   };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-5">
       <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl p-6 scrollbar-hide">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold">Update Project</h2>
+          <h2 className="text-lg font-semibold">Tambah Project</h2>
 
           <button
             onClick={onClose}
@@ -119,71 +106,11 @@ const UpdateProject = ({ project, onSuccess, onClose }) => {
               Category
             </label>
 
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setCategoryOpen(!categoryOpen)}
-                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-left text-sm flex items-center justify-between"
-              >
-                <span
-                  className={form.category ? "text-gray-900" : "text-[#6c6c6c]"}
-                >
-                  {form.category || "Select Category"}
-                </span>
-
-                <span
-                  className={`transition-transform ${
-                    categoryOpen ? "rotate-180" : ""
-                  }`}
-                >
-                  ↓
-                </span>
-              </button>
-
-              <p id="title-info" className="text-xs mt-1.5 text-gray-500">
-                ini jenis kategori project con
-              </p>
-
-              {categoryOpen && (
-                <div className="absolute z-50 mt-2 w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg">
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      type="button"
-                      onClick={() => {
-                        setForm({
-                          ...form,
-                          category,
-                        });
-                        setCategoryOpen(false);
-                      }}
-                      className={`block w-full px-4 py-3 text-left text-sm transition-colors hover:bg-gray-100 ${
-                        form.category === category
-                          ? "bg-gray-50 font-medium"
-                          : ""
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-1.5">
-            <label
-              htmlFor="title"
-              className="text-sm font-medium text-gray-700"
-            >
-              Title
-            </label>
-
             <input
-              id="title"
-              name="title"
-              placeholder="Contoh: Content-Based Movie Recommendation Using TF-IDF and Cosine Similarity: An Analysis on the TMDB Dataset"
-              value={form.title}
+              id="category"
+              name="category"
+              placeholder="Contoh: Internship or Contract"
+              value={form.category}
               onChange={handleChange}
               aria-describedby="title-info"
               className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
@@ -191,77 +118,78 @@ const UpdateProject = ({ project, onSuccess, onClose }) => {
       focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
             />
 
-            <p id="title-info" className="text-xs text-gray-500">
-              kalo ini judulnya, udah gitu aja
+            <p id="category-info" className="text-xs text-gray-500">
+              jenis pengalaman ya ini
             </p>
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="title" className="text-sm font-medium">
-              Subtitle
+            <label htmlFor="role" className="text-sm font-medium text-gray-700">
+              Role
             </label>
 
             <input
-              name="subtitle"
-              placeholder="Contoh: Project of CodingCampby DBS Foundation 2025"
-              value={form.subtitle}
+              id="role"
+              name="role"
+              placeholder="Contoh: Payment System Policy & Oversight (TIKSPPUR)"
+              value={form.role}
               onChange={handleChange}
-              aria-describedby="subtitle-info"
+              aria-describedby="role-info"
               className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
       focus:border-transparent
       focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
             />
 
-            <p id="title-info" className="text-xs text-gray-500">
-              yang ini subtitle, kaya.. ya subtitle aja, misal event atau apa gt
+            <p id="role-info" className="text-xs text-gray-500">
+              kalo ini posisi, jadi apa gtu gatau
             </p>
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="title" className="text-sm font-medium">
-              Year
+            <label htmlFor="company" className="text-sm font-medium">
+              Company
             </label>
 
             <input
-              name="year"
-              placeholder="Contoh: March 2025"
-              value={form.year}
+              name="company"
+              placeholder="Contoh: KPw Bank Indonesia Provinsi Jawa Tengah"
+              value={form.company}
               onChange={handleChange}
-              aria-describedby="year-info"
+              aria-describedby="company-info"
               className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
       focus:border-transparent
       focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
             />
 
-            <p id="title-info" className="text-xs text-gray-500">
-              ini diisi tahun doang atau sm bulan jg terserah
+            <p id="company-info" className="text-xs text-gray-500">
+              yang ini nama perusahaannya
             </p>
           </div>
 
           <div className="flex flex-col gap-1.5">
             <label htmlFor="title" className="text-sm font-medium">
-              Software
+              Periode
             </label>
 
             <input
-              name="software"
-              placeholder="Contoh: VS Code, GoogleColabs - Python"
-              value={form.software}
+              name="period"
+              placeholder="Contoh: April - May 2025"
+              value={form.period}
               onChange={handleChange}
-              aria-describedby="software-info"
+              aria-describedby="period-info"
               className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
       focus:border-transparent
       focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
             />
 
-            <p id="title-info" className="text-xs text-gray-500">
-              enih sofwer atau tul yg dipake apa aja
+            <p id="period-info" className="text-xs text-gray-500">
+              tau lah ya ini apaan
             </p>
           </div>
 
           <div className="flex flex-col gap-1.5">
             <label htmlFor="bullets" className="text-sm font-medium">
-              Description
+              Job Description
             </label>
 
             <textarea
@@ -279,7 +207,7 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
             />
 
             <p id="bullets-info" className="text-xs text-gray-500">
-              ini penting nih, kl deskripsinya ada bbpr paragraf, tolong beda baris y, mks (pake
+              ini penting nih, kl job nya banyak, tolong beda baris y, mks (pake
               enter! biar beda baris)
             </p>
           </div>
@@ -289,7 +217,7 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
               htmlFor="image"
               className="text-sm font-medium text-gray-700"
             >
-              Image
+              Logo Company
             </label>
 
             <input
@@ -308,8 +236,7 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
             />
 
             <p id="title-info" className="text-xs  text-gray-500">
-              nah ini yg terakhir gambar project - max 2 mb ya jgn gede"
-              ukurannya
+              logo tempat km mengabdi - max 100kb aja ya hhh
             </p>
 
             {imagePreview && (
@@ -329,15 +256,15 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
               onClick={onClose}
               className="px-4 py-2 rounded-lg text-sm text-[#6c6c6c] bg-gray-100 cursor-pointer hover:-translate-y-0.5 hover:shadow-md duration-300"
             >
-              gjd apdet
+              gjd tambah
             </button>
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={uploading}
               className="px-4 py-2 text-sm rounded-lg bg-linear-to-r from-biru to-hijau text-white disabled:opacity-50 cursor-pointer hover:-translate-y-0.5 hover:shadow-md duration-300"
             >
-              {loading ? "ngeapdet..." : "apdet"}
+              {uploading ? "nambah..." : "tambah"}
             </button>
           </div>
         </form>
@@ -346,4 +273,4 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
   );
 };
 
-export default UpdateProject;
+export default AddWorkExperienceModal;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../../../../lib/supabaseClient";
-const DeleteProject = ({ project, onClose, onSuccess }) => {
+const DeleteWorkExperience = ({ workExperience, onClose, onSuccess }) => {
   const [deleting, setDeleting] = useState(false);
 
   const handleDelete = async () => {
@@ -8,9 +8,9 @@ const DeleteProject = ({ project, onClose, onSuccess }) => {
 
     try {
       const { error } = await supabase
-        .from("projects")
+        .from("work_experiences")
         .delete()
-        .eq("id", project.id);
+        .eq("id", workExperience.id);
 
       if (error) {
         throw error;
@@ -68,4 +68,4 @@ const DeleteProject = ({ project, onClose, onSuccess }) => {
   );
 };
 
-export default DeleteProject;
+export default DeleteWorkExperience;

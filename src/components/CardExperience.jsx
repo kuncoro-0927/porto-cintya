@@ -37,7 +37,7 @@ const CardExperience = ({ item, defaultOpen = false }) => {
       <div className="flex items-start gap-6 justify-between">
         <div className="flex items-center gap-3">
           <img
-            src={item.logo}
+            src={item.logo || item.logo_url}
             className="w-14 h-14 object-contain"
             alt={item.company}
           />

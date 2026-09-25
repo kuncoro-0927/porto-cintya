@@ -8,3 +8,12 @@ export async function getProjects() {
 
   return data || [];
 }
+
+export async function getWorkExperiences() {
+  const { data, error } = await supabase.from("work_experiences").select("*");
+
+  console.log("DATA WORK EXPERIENCES:", data);
+  console.log("ERROR WORK EXPERIENCES:", error);
+
+  return data || [];
+}

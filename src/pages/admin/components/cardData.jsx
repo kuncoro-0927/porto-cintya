@@ -1,6 +1,6 @@
 const CardData = ({ title, icon, subtitle }) => {
   return (
-    <div className="p-6 w-full bg-white rounded-xl">
+    <div className="p-6 w-full bg-white rounded-xl hover:-translate-y-0.5 hover:shadow-md duration-300">
       <div className="flex items-center justify-between">
         <span>{icon}</span>
 
