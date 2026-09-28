@@ -72,7 +72,7 @@ const Admin = () => {
 
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
                 <ProfileLink
-                  to="../data/profile/index.jsx"
+                  to="/admin/profile"
                   className="flex items-center gap-2 absolute inset-x-0 bottom-2 left-2 text-sm p-4 font-medium text-white bg-white/20 backdrop-blur-xs px-3 py-2 w-fit rounded-lg"
                 >
                   Update Profile
@@ -83,7 +83,7 @@ const Admin = () => {
                 <CardData
                   title="Project"
                   icon={
-                    <i className="bi bi-folder2-open text-2xl bg-linear-to-r from-biru to-hijau bg-clip-text text-transparent"></i>
+                    <i className="bi bi-folder2-open text-2xl bg-linear-to-r from-biru to-hijau bg-clip-text text-transparent shrink-0"></i>
                   }
                   subtitle={
                     totalProjects !== null
@@ -94,7 +94,7 @@ const Admin = () => {
                 <CardData
                   title="Work Experience"
                   icon={
-                    <i class="bi bi-briefcase text-2xl bg-linear-to-r from-biru to-hijau bg-clip-text text-transparent"></i>
+                    <i class="bi bi-briefcase text-2xl bg-linear-to-r from-biru to-hijau bg-clip-text text-transparent shrink-0"></i>
                   }
                   subtitle={
                     totalExperiences !== null
@@ -105,7 +105,7 @@ const Admin = () => {
                 {/* <CardData
                   title="Software"
                   icon={
-                    <i class="bi bi-window text-2xl bg-linear-to-r from-biru to-hijau bg-clip-text text-transparent"></i>
+                    <i class="bi bi-window text-2xl bg-linear-to-r from-biru to-hijau bg-clip-text text-transparent shrink-0"></i>
                   }
                   subtitle="4 Software Tools"
                 /> */}
