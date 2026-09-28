@@ -17,3 +17,19 @@ export async function getWorkExperiences() {
 
   return data || [];
 }
+
+export async function getProfile() {
+  const { data, error } = await supabase
+    .from("profile")
+    .select("*")
+    .maybeSingle();
+
+  console.log("DATA PROFILE:", data);
+  console.log("ERROR PROFILE:", error);
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}

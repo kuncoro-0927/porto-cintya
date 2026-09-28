@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaLinkedin } from "react-icons/fa";
 import CardExperience from "../components/CardExperience";
 import { experiences } from "../data/dataWorkExperience";
-import { getWorkExperiences } from "../services/projectService";
+import { getWorkExperiences } from "../services/supabaseService";
 const WorkExperiences = () => {
   const [workexperience, setWorkExperience] = useState(experiences);
 
@@ -34,9 +34,11 @@ const WorkExperiences = () => {
       </div>
 
       <div className="flex flex-col gap-6">
-        {workexperience.map((exp, index) => (
-          <CardExperience key={exp.id} item={exp} defaultOpen={index === 0} />
-        ))}
+        {[...workexperience]
+          .sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
+          .map((exp, index) => (
+            <CardExperience key={exp.id} item={exp} defaultOpen={index === 0} />
+          ))}
       </div>
     </section>
   );

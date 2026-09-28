@@ -5,7 +5,8 @@ const UpdateWorkExperience = ({ workExperience, onSuccess, onClose }) => {
     category: workExperience.category || "",
     role: workExperience.role || "",
     company: workExperience.company || "",
-    period: workExperience.period || "",
+    start_date: workExperience.start_date || "",
+    end_date: workExperience.end_date || "",
     bullets: workExperience.bullets?.join("\n") || "",
   });
 
@@ -66,7 +67,8 @@ const UpdateWorkExperience = ({ workExperience, onSuccess, onClose }) => {
           role: form.role,
 
           company: form.company,
-          period: form.period,
+          start_date: form.start_date,
+          end_date: form.end_date,
           bullets: bullets,
           logo_url: imageUrl,
         })
@@ -167,7 +169,7 @@ const UpdateWorkExperience = ({ workExperience, onSuccess, onClose }) => {
             </p>
           </div>
 
-          <div className="flex flex-col gap-1.5">
+          {/* <div className="flex flex-col gap-1.5">
             <label htmlFor="title" className="text-sm font-medium">
               Periode
             </label>
@@ -186,6 +188,50 @@ const UpdateWorkExperience = ({ workExperience, onSuccess, onClose }) => {
             <p id="period-info" className="text-xs text-gray-500">
               tau lah ya ini apaan
             </p>
+          </div> */}
+
+          <div className="flex items-center gap-3 w-full">
+            <div className="flex flex-col gap-1.5 w-full">
+              <label htmlFor="start_date" className="text-sm font-medium">
+                Tanggal Mulai
+              </label>
+
+              <input
+                id="start_date"
+                name="start_date"
+                type="date"
+                value={form.start_date}
+                onChange={handleChange}
+                className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
+      focus:border-transparent
+      focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
+                required
+              />
+              <p id="company-info" className="text-xs text-gray-500">
+                tgl mulai km bekerja
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-1.5 w-full">
+              <label htmlFor="end_date" className="text-sm font-medium">
+                Tanggal Selesai
+              </label>
+
+              <input
+                id="end_date"
+                name="end_date"
+                type="date"
+                value={form.end_date}
+                onChange={handleChange}
+                className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
+      focus:border-transparent
+      focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
+                required
+              />
+              <p id="company-info" className="text-xs text-gray-500">
+                tgl selesai km bekerja
+              </p>
+            </div>
           </div>
 
           <div className="flex flex-col gap-1.5">
@@ -208,7 +254,8 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
             />
 
             <p id="bullets-info" className="text-xs text-gray-500">
-              ini penting nih, kl job nya banyak, tolong beda baris y, mks (pake enter! biar beda baris)
+              ini penting nih, kl job nya banyak, tolong beda baris y, mks (pake
+              enter! biar beda baris)
             </p>
           </div>
 
@@ -256,7 +303,7 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
               onClick={onClose}
               className="px-4 py-2 rounded-lg text-sm text-[#6c6c6c] bg-gray-100 cursor-pointer hover:-translate-y-0.5 hover:shadow-md duration-300"
             >
-              gjd tambah
+              gjd apdet
             </button>
 
             <button
@@ -264,7 +311,7 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
               disabled={loading}
               className="px-4 py-2 text-sm rounded-lg bg-linear-to-r from-biru to-hijau text-white disabled:opacity-50 cursor-pointer hover:-translate-y-0.5 hover:shadow-md duration-300"
             >
-              {loading ? "nambah..." : "tambah"}
+              {loading ? "ngeapdet..." : "apdet"}
             </button>
           </div>
         </form>

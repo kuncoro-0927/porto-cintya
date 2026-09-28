@@ -3,8 +3,8 @@ import { CiMail } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa6";
 import { FiHome, FiEdit3, FiBookOpen, FiUser } from "react-icons/fi";
 import gsap from "gsap";
-import profile from "../assets/images/profile-cintya.jpeg";
-
+import profile_img from "../assets/images/profile-cintya.jpeg";
+import { getProfile } from "../services/supabaseService";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -88,6 +88,17 @@ const Navbar = () => {
     { href: "#contact", label: "Contact", icon: FiHome },
   ];
 
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const data = await getProfile();
+      setProfile(data);
+    };
+
+    fetchProfile();
+  }, []);
+
   return (
     <>
       <nav
@@ -100,8 +111,8 @@ const Navbar = () => {
           <div className="bg-white p-0.5 rounded-md">
             <img
               className="w-10 h-10 object-cover rounded-md"
-              src={profile}
-              alt=""
+              src={profile?.image_url || profile_img}
+              alt={profile?.name || ""}
             />
           </div>
           <h1 className="text-left text-base font-medium">Data Enthusiast</h1>

@@ -5,7 +5,7 @@ export default function StorageUsage({ used = 12, total = 50 }) {
   const maskId = useId().replace(/:/g, "");
 
   return (
-    <div className="w-full max-w-155 rounded-xl bg-linear-to-r from-biru to-hijau p-6 text-white">
+    <div className="w-full shrink-0 max-w-155 rounded-xl bg-linear-to-r from-biru to-hijau p-6 text-white">
       {/* Header */}
       <div className="mb-1 flex items-center justify-between">
         <h2 className="text-base font-semibold">Storage Usage</h2>

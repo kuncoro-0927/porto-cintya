@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
-
+import formatPeriod from "../services/formatPeriod";
 const CardExperience = ({ item, defaultOpen = false }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const contentRef = useRef(null);
@@ -44,7 +44,7 @@ const CardExperience = ({ item, defaultOpen = false }) => {
           <div className="flex flex-col">
             <span className="text-base font-medium">{item.company}</span>
             <span className="text-[#999999] text-sm font-medium">
-              {item.period}
+              {formatPeriod(item.start_date, item.end_date)}
             </span>
           </div>
         </div>

@@ -28,7 +28,7 @@ const DeleteWorkExperience = ({ workExperience, onClose, onSuccess }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-5">
       <div className="w-full max-w-md max-h-[90vh] overflow-y-auto bg-white rounded-2xl p-6 scrollbar-hide">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold">Hapus Project</h2>
+          <h2 className="text-lg font-semibold">Hapus Experience</h2>
 
           <button
             onClick={onClose}

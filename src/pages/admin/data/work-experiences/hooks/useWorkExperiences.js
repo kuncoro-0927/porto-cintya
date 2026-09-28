@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useRef, useState } from "react";
-import { getWorkExperiences } from "../../../../../services/projectService";
+import { getWorkExperiences } from "../../../../../services/supabaseService";
 
 const useWorkExperiences = () => {
   const [workExperiences, setWorkExperiences] = useState([]);

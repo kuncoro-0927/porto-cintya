@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useProjects from "./hooks/useProjects";
 import AddProjectModal from "./addProject";
 import DetailProject from "./detailProject";
 import UpdateProject from "./updateProject";
 import DeleteProject from "./deleteProject";
-const DataProject = () => {
-  const { projects, tableScrollRef, trackRef, thumbRef, getProjects } =
+const DataProject = ({ onLoadingChange }) => {
+  const { projects, loading, tableScrollRef, trackRef, thumbRef, getProjects } =
     useProjects();
   const [showModal, setShowModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -14,6 +14,13 @@ const DataProject = () => {
   const filteredProjects = projects.filter(
     (project) => project.category === activeCategory,
   );
+
+  useEffect(() => {
+    if (!loading) {
+      onLoadingChange(false);
+    }
+  }, [loading, onLoadingChange]);
+
   return (
     <div className="w-full p-6 bg-white rounded-xl">
       <div className="flex flex-col gap-4">
@@ -77,7 +84,7 @@ const DataProject = () => {
             onClick={() => setShowModal(true)}
             className="hidden lg:block bg-linear-to-r from-biru to-hijau text-white flex items-center gap-2 px-3 py-2 text-sm rounded-lg w-fit hover:-translate-y-0.5 hover:shadow-lg duration-300 cursor-pointer"
           >
-            <span className="">Add New Project</span>+
+            <span className="">Add New Project</span> +
           </button>
 
           <button

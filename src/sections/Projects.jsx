@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import CardProject from "../components/CardProject";
 import { NavLink } from "react-router-dom";
 import defaultProjects from "../data/dataProject";
-import { getProjects } from "../services/projectService";
+import { getProjects } from "../services/supabaseService";
 import logoR from "../assets/images/software/Rlogo.svg";
 import logoPython from "../assets/images/software/Python-logo-notext.svg";
 import logoTableau from "../assets/images/software/Tableau Icon - Colored - zonalogo.com.svg";

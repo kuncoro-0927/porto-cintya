@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useWorkExperiences from "./hooks/useWorkExperiences";
 import AddWorkExperienceModal from "./addWorkExperience";
 import UpdateWorkExperience from "./updateWorkExperience";
 import DetailWorkExperience from "./detailWorkExperience";
 import DeleteWorkExperience from "./deleteWorkExperience";
-
-const DataWorkExperiences = () => {
+import formatPeriod from "../../../../services/formatPeriod";
+const DataWorkExperiences = ({ onLoadingChange }) => {
   const {
     workExperiences,
+    loading,
     getWorkExperiences,
     tableScrollRef,
     trackRef,
@@ -16,6 +17,12 @@ const DataWorkExperiences = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedWorkExperience, setSelectedWorkExperience] = useState(null);
   const [actionModal, setActionModal] = useState(null);
+
+  useEffect(() => {
+    if (!loading) {
+      onLoadingChange(false);
+    }
+  }, [loading, onLoadingChange]);
 
   return (
     <div className="w-full p-6 bg-white rounded-xl">
@@ -74,7 +81,12 @@ const DataWorkExperiences = () => {
                 </td>
 
                 <td className="p-3 max-w-[100px]">
-                  <div className="truncate">{workExperience.period}</div>
+                  <div className="truncate">
+                    {formatPeriod(
+                      workExperience.start_date,
+                      workExperience.end_date,
+                    )}
+                  </div>
                 </td>
 
                 <td className="p-3 max-w-[250px]">

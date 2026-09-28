@@ -10,6 +10,8 @@ const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
     role: "",
     company: "",
     period: "",
+    start_date: "",
+    end_date: "",
     bullets: "",
     image_url: "",
   });
@@ -64,7 +66,8 @@ const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
           category: form.category,
           role: form.role,
           company: form.company,
-          period: form.period,
+          start_date: "",
+          end_date: "",
           bullets: bullets,
           logo_url: imageUrl,
         },
@@ -87,7 +90,7 @@ const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-5">
       <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl p-6 scrollbar-hide">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold">Tambah Project</h2>
+          <h2 className="text-lg font-semibold">Tambah Pengalaman</h2>
 
           <button
             onClick={onClose}
@@ -166,7 +169,7 @@ const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
             </p>
           </div>
 
-          <div className="flex flex-col gap-1.5">
+          {/* <div className="flex flex-col gap-1.5">
             <label htmlFor="title" className="text-sm font-medium">
               Periode
             </label>
@@ -185,6 +188,50 @@ const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
             <p id="period-info" className="text-xs text-gray-500">
               tau lah ya ini apaan
             </p>
+          </div> */}
+
+          <div className="flex items-center gap-3 w-full">
+            <div className="flex flex-col gap-1.5 w-full">
+              <label htmlFor="start_date" className="text-sm font-medium">
+                Tanggal Mulai
+              </label>
+
+              <input
+                id="start_date"
+                name="start_date"
+                type="date"
+                value={form.start_date}
+                onChange={handleChange}
+                className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
+      focus:border-transparent
+      focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
+                required
+              />
+              <p id="company-info" className="text-xs text-gray-500">
+                tgl mulai km bekerja
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-1.5 w-full">
+              <label htmlFor="end_date" className="text-sm font-medium">
+                Tanggal Selesai
+              </label>
+
+              <input
+                id="end_date"
+                name="end_date"
+                type="date"
+                value={form.end_date}
+                onChange={handleChange}
+                className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
+      focus:border-transparent
+      focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
+                required
+              />
+              <p id="company-info" className="text-xs text-gray-500">
+                tgl selesai km bekerja
+              </p>
+            </div>
           </div>
 
           <div className="flex flex-col gap-1.5">

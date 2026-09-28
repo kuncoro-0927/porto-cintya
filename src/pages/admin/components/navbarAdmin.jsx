@@ -1,6 +1,9 @@
-import { useState } from "react";
-import profile from "../../../assets/images/profile-cintya.jpeg";
-
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import profile_img from "../../../assets/images/profile-cintya.jpeg";
+import { Link } from "react-router-dom";
+import { getProfile } from "../../../services/supabaseService";
+import { supabase } from "../../../lib/supabaseClient";
 const NavbarAdmin = ({ setActiveSection }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -9,14 +12,39 @@ const NavbarAdmin = ({ setActiveSection }) => {
     setMenuOpen(false);
   };
 
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error("Logout error:", error);
+      alert(error.message);
+      return;
+    }
+
+    navigate("/admin/login");
+  };
+
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const data = await getProfile();
+      setProfile(data);
+    };
+
+    fetchProfile();
+  }, []);
+
   return (
-    <nav className="relative xl:px-20 xl:py-5 px-4 py-4 flex items-center justify-between">
+    <nav className="relative lg:px-20 xl:py-5 2xl:px-44 px-4 sm:px-20 py-4 flex items-center justify-between">
       <div>
         <span className="font-medium">Dashboard</span>
       </div>
 
       {/* Menu tengah - desktop only */}
-      <div className="hidden xl:block absolute left-1/2 -translate-x-1/2 items-center">
+      <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 items-center">
         <ul className="flex items-center text-base gap-6 justify-center text-[#6c6c6c]">
           <li
             onClick={() => setActiveSection("project")}
@@ -30,20 +58,27 @@ const NavbarAdmin = ({ setActiveSection }) => {
           >
             Experience
           </li>
+
+          <li className="hover:text-biru duration-300 cursor-pointer">
+            <Link to="/admin/profile">Profile</Link>
+          </li>
         </ul>
       </div>
 
       {/* Profile - desktop only */}
-      <div className="hidden xl:flex items-stretch gap-2">
+      <div className="hidden lg:flex items-stretch gap-2">
         <div className="flex flex-col text-sm text-right ">
           <span className="font-medium">Cintya Kusuma</span>
           <span className="text-xs text-[#6c6c6c]">cintyakusuma@gmail.com</span>
         </div>
-        <div className="h-10 w-10">
+        <div
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="h-10 w-10 cursor-pointer"
+        >
           <img
             className="h-full w-full object-cover rounded-lg"
-            src={profile}
-            alt=""
+            src={profile?.image_url || profile_img}
+            alt={profile?.name || ""}
           />
         </div>
       </div>
@@ -51,7 +86,7 @@ const NavbarAdmin = ({ setActiveSection }) => {
       {/* Hamburger - mobile only */}
       <button
         onClick={() => setMenuOpen(!menuOpen)}
-        className="xl:hidden flex flex-col justify-center items-center gap-1.5 w-8 h-8"
+        className="lg:hidden flex flex-col justify-center items-center gap-1.5 w-8 h-8"
       >
         <span
           className={`block h-0.5 w-6 bg-black rounded-full transition-all duration-300 ${
@@ -75,32 +110,40 @@ const NavbarAdmin = ({ setActiveSection }) => {
         <>
           {/* overlay buat nutup pas klik luar */}
           <div
-            className="fixed inset-0 z-40 xl:hidden"
+            className="fixed inset-0 z-40"
             onClick={() => setMenuOpen(false)}
           />
 
-          <div className="absolute top-16 right-6 z-50 w-56 rounded-xl bg-white shadow-lg border border-gray-100 p-4 xl:hidden">
+          <div className="absolute top-16 right-6 lg:right-20  z-50 w-56 lg:w-fit rounded-xl bg-white shadow-lg border border-gray-100 p-4 lg:px-4 lg:py-3">
             <ul className="flex flex-col gap-3 text-sm text-[#6c6c6c]">
               <li
                 onClick={() => handleSelect("project")}
-                className="hover:text-biru duration-300 cursor-pointer"
+                className="hover:text-biru duration-300 cursor-pointer lg:hidden"
               >
                 Project
               </li>
               <li
                 onClick={() => handleSelect("workExperience")}
-                className="hover:text-biru duration-300 cursor-pointer"
+                className="hover:text-biru duration-300 cursor-pointer lg:hidden"
               >
                 Experience
               </li>
+
+              <li
+                onClick={handleLogout}
+                className="hover:text-red-500 flex items-center gap-3 duration-300 cursor-pointer"
+              >
+                Logout
+                <i class="bi bi-box-arrow-right"></i>
+              </li>
             </ul>
 
-            <div className="border-t border-gray-100 mt-3 pt-3 flex items-center gap-3">
+            <div className="border-t border-gray-100 mt-3 pt-3 flex items-center gap-3 lg:hidden">
               <div className="h-10 w-10 shrink-0">
                 <img
                   className="h-full w-full object-cover rounded-lg"
-                  src={profile}
-                  alt=""
+                  src={profile?.image_url || profile_img}
+                  alt={profile?.name || ""}
                 />
               </div>
               <div className="flex flex-col text-sm">

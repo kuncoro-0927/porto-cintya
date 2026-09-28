@@ -1,3 +1,4 @@
+import formatPeriod from "../../../../../services/formatPeriod";
 const DetailWorkExperience = ({ onClose, workExperience }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-5">
@@ -35,8 +36,7 @@ const DetailWorkExperience = ({ onClose, workExperience }) => {
           <p className="bg-linear-to-r font-medium from-biru to-hijau bg-clip-text text-transparent">
             Periode: <br />
             <span className="text-[#6c6c6c] font-normal">
-              {" "}
-              {workExperience.period}
+              {formatPeriod(workExperience.start_date, workExperience.end_date)}
             </span>
           </p>
           <div>
