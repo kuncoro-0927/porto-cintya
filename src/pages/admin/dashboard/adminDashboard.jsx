@@ -12,7 +12,9 @@ import {
 } from "../../../services/supabaseService";
 import StorageUsage from "../components/storageUsage";
 const Admin = () => {
-  const [activeSection, setActiveSection] = useState("project");
+  const [activeSection, setActiveSection] = useState(
+    () => localStorage.getItem("adminSection") || "project",
+  );
   const [sectionLoading, setSectionLoading] = useState(false);
   const [totalProjects, setTotalProjects] = useState(0);
   const [totalExperiences, setTotalExperiences] = useState(0);
@@ -21,6 +23,7 @@ const Admin = () => {
 
     setSectionLoading(true);
     setActiveSection(section);
+    localStorage.setItem("adminSection", section);
   };
 
   const [profile, setProfile] = useState(null);
@@ -54,7 +57,7 @@ const Admin = () => {
       <main className=" gap-6 py-10 px-4 sm:px-20 lg:px-20 2xl:px-44">
         <section className="">
           <div className=" mb-6">
-            <h1 className="xl:text-3xl">Welcome Con!</h1>
+            <h1 className="text-2xl xl:text-3xl">Welcome Con!</h1>
             <span className="text-sm text-[#6c6c6c]">
               ini dashboardnya yh, semoga hari-harimu selalu lancar
             </span>

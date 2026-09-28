@@ -2,7 +2,7 @@ const CardData = ({ title, icon, subtitle }) => {
   return (
     <div className="p-6 w-full bg-white rounded-xl hover:-translate-y-0.5 hover:shadow-md duration-300">
       <div className="flex items-center justify-between">
-        <span>{icon}</span>
+        <span className="w-12 h-12 shrink-0">{icon}</span>
 
         <div className="flex justify-center items-center h-8 w-8 rounded-lg bg-gray-100">
           <i class="bi bi-arrow-up-right bg-linear-to-r from-biru to-hijau bg-clip-text text-transparent"></i>

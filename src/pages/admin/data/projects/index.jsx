@@ -89,7 +89,7 @@ const DataProject = ({ onLoadingChange }) => {
 
           <button
             onClick={() => setShowModal(true)}
-            className="block lg:hidden bg-linear-to-r from-biru to-hijau text-white flex items-center gap-2 px-3 py-2 text-sm rounded-lg w-fit hover:-translate-y-0.5 hover:shadow-lg duration-300 cursor-pointer"
+            className=" lg:hidden bg-linear-to-r from-biru to-hijau text-white flex items-center gap-2 px-4 py-2 text-base rounded-lg w-fit hover:-translate-y-0.5 hover:shadow-lg duration-300 cursor-pointer"
           >
             <span className="">+</span>
           </button>
@@ -158,8 +158,8 @@ const DataProject = ({ onLoadingChange }) => {
                   )}
                 </td>
 
-                <td className="sticky  right-0 bg-white flex items-center gap-3 p-3 w-full text-center">
-                  <div className="action-dropdown flex items-center space-x-3">
+                <td className="sticky right-0 z-20 bg-white p-3">
+                  <div className="action-dropdown flex items-center justify-center gap-3">
                     <button
                       onClick={() => {
                         setSelectedProject(project);

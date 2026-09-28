@@ -29,11 +29,19 @@ const DataWorkExperiences = ({ onLoadingChange }) => {
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <span className="font-medium">List Work Experiences</span>
+
           <button
             onClick={() => setShowModal(true)}
-            className="bg-linear-to-r from-biru to-hijau text-white flex items-center gap-2 px-3 py-2 text-sm rounded-lg w-fit hover:-translate-y-0.5 hover:shadow-lg duration-300 cursor-pointer"
+            className="bg-linear-to-r hidden lg:flex from-biru to-hijau text-white items-center gap-2 px-3 py-2 text-sm rounded-lg w-fit hover:-translate-y-0.5 hover:shadow-lg duration-300 cursor-pointer"
           >
             <span className="">Add New Experience</span>+
+          </button>
+
+          <button
+            onClick={() => setShowModal(true)}
+            className="bg-linear-to-r lg:hidden from-biru to-hijau text-white flex items-center gap-2 px-4 py-2 text-base rounded-lg w-fit hover:-translate-y-0.5 hover:shadow-lg duration-300 cursor-pointer"
+          >
+            <span className="">+</span>
           </button>
         </div>
       </div>
@@ -106,8 +114,8 @@ const DataWorkExperiences = ({ onLoadingChange }) => {
                   )}
                 </td>
 
-                <td className="sticky  right-0 bg-white flex items-center gap-3 p-3 w-full text-center">
-                  <div className="action-dropdown flex items-center space-x-3">
+                <td className="sticky right-0 z-20 bg-white p-3">
+                  <div className="action-dropdown flex items-center justify-center gap-3">
                     <button
                       onClick={() => {
                         setSelectedWorkExperience(workExperience);
@@ -147,7 +155,7 @@ const DataWorkExperiences = ({ onLoadingChange }) => {
 
       <div
         ref={trackRef}
-        className="h-2 w-[400px] mx-auto mt-4 bg-[#ECECEC] rounded-full relative cursor-pointer"
+        className="h-2 w:-[100px] lg:w-[400px] mx-auto mt-4 bg-[#ECECEC] rounded-full relative cursor-pointer"
       >
         <div
           ref={thumbRef}
