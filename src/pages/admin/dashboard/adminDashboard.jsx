@@ -86,7 +86,7 @@ const Admin = () => {
                 <CardData
                   title="Project"
                   icon={
-                    <i className="bi bi-folder2-open text-2xl bg-linear-to-r from-biru to-hijau bg-clip-text text-transparent shrink-0"></i>
+                    <i className="bi bi-folder2-open inline-block text-2xl bg-linear-to-r from-biru to-hijau bg-clip-text text-transparent"></i>
                   }
                   subtitle={
                     totalProjects !== null
@@ -97,7 +97,7 @@ const Admin = () => {
                 <CardData
                   title="Work Experience"
                   icon={
-                    <i class="bi bi-briefcase text-2xl bg-linear-to-r from-biru to-hijau bg-clip-text text-transparent shrink-0"></i>
+                    <i class="bi bi-briefcase inline-block text-2xl bg-linear-to-r from-biru to-hijau bg-clip-text text-transparent"></i>
                   }
                   subtitle={
                     totalExperiences !== null

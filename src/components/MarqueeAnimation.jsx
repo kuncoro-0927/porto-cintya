@@ -33,21 +33,36 @@ const fallbackProjects = [
 ];
 
 const MarqueeAnimation = () => {
-  const [projects, setProjects] = useState(fallbackProjects);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const data = await getProjects();
+      try {
+        const data = await getProjects();
 
-      const validProjects = data?.filter((project) => project.image_url);
+        const validProjects =
+          data?.filter((project) => project.image_url) || [];
 
-      if (validProjects?.length > 0) {
-        setProjects(validProjects);
+        if (validProjects.length > 0) {
+          setProjects(validProjects);
+        } else {
+          setProjects(fallbackProjects);
+        }
+      } catch (error) {
+        console.error("Error get marquee projects:", error);
+        setProjects(fallbackProjects);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProjects();
   }, []);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <Marquee speed={35} direction="left" autoFill className="py-3">
