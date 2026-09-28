@@ -20,7 +20,7 @@ const WorkExperiences = () => {
     fetchProjects();
   }, []);
   return (
-    <section className="p-6 sm:p-20 lg:p-20 mt-20 lg:mt-0 py-20 lg:py-40 2xl:px-40 flex flex-col gap-10 lg:flex-row items-start justify-between bg-black text-white">
+    <section className="p-6 sm:p-20 lg:p-20  lg:mt-0 py-20 lg:py-40 2xl:px-40 flex flex-col gap-10 lg:flex-row items-start justify-between bg-black text-white">
       <div className="lg:sticky lg:top-40 lg:self-start">
         <div className="border border-yellow-500 text-yellow-500 rounded-full px-4 py-2 w-fit">
           Work Experiences

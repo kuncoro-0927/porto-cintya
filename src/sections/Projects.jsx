@@ -69,7 +69,7 @@ const Projects = () => {
   }, []);
 
   return (
-    <section className="mt-20 lg:mt-0 lg:py-40 flex flex-col justify-center">
+    <section className="py-20  lg:mt-0 lg:py-40 flex flex-col justify-center">
       <div className="flex justify-between items-end w-full px-5 sm:px-20 lg:px-20 2xl:px-40">
         <div className="justify-start items-start flex flex-col">
           <div className="border border-amber-800 text-amber-800 rounded-full px-4 py-2 w-fit">
@@ -189,7 +189,7 @@ const Projects = () => {
           </span>
         </div>
 
-        <div className="flex flex-wrap justify-start lg:justify-center items-stretch gap-6 max-w-xl">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:flex lg:flex-wrap justify-start lg:justify-center items-stretch gap-6 max-w-xl">
           <div className="bg-[#eeeeee] flex justify-center p-6 rounded-2xl">
             <img src={logoR} className="w-14 h-auto" alt="R" />
           </div>

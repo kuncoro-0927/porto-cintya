@@ -40,7 +40,7 @@ const About = () => {
   const experienceYears = calculateExperienceYears(workExperiences);
 
   return (
-    <section className="p-6 sm:p-20 lg:p-20 lg:py-40 2xl:px-40 flex flex-col lg:flex-row gap-3 items-stretch bg-gray-100 mt-20 lg:mt-0">
+    <section className="p-6 py-20 sm:p-20 lg:p-20 lg:py-40 2xl:px-40 flex flex-col lg:flex-row gap-3 items-stretch bg-gray-100 mt-20 lg:mt-0">
       <div className="flex flex-col justify-between w-full lg:max-w-sm bg-black text-white p-6 rounded-3xl shadow-2xl shadow-black">
         <div className="flex flex-col gap-3">
           <span className="font-medium text-2xl">
