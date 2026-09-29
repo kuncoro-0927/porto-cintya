@@ -92,7 +92,7 @@ const ProfileAdmin = () => {
                     </label>
                   </div>
                   <span className="text-sm text-[#6c6c6c]">
-                    bisa jpg, jpeg, png, svg dll. emm max 2 mb aja yh
+                    bisa jpg, jpeg, png, svg dll. emm max 500 kb aja yh
                   </span>
                 </div>
               </div>

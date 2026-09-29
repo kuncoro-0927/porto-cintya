@@ -1,6 +1,7 @@
 import { FaLinkedin } from "react-icons/fa";
-
+import useProfile from "../pages/admin/data/profile/hooks/useProfile";
 const Header = () => {
+  const { profile } = useProfile();
   return (
     <header className="px-6 mt-40 sm:px-20 lg:p-20 lg:mt-20 2xl:px-40">
       <div className=" flex flex-col gap-5 justify-center items-center text-center">
@@ -16,12 +17,24 @@ const Header = () => {
           and business growth.
         </span>
         <div className="flex items-center gap-3 mt-5 text-sm lg:text-[18px]">
-          <button className="flex items-center gap-2 bg-black py-3 px-5 font-medium rounded-xl text-white drop-shadow-md drop-shadow-black">
+          <a
+            target="_blank"
+            href={profile?.linkedin || ""}
+            className="flex items-center gap-2 bg-black py-3 px-5 font-medium rounded-xl text-white drop-shadow-md drop-shadow-black hover:-translate-y-0.5 hover:shadow-md duration-300 cursor-pointer"
+          >
+            {" "}
             <FaLinkedin className="text-xl" /> Connect with me
-          </button>
-          <button className="bg-gray-100 py-3 px-5 rounded-xl font-medium">
+          </a>
+
+          <a
+            href={profile?.cv_url}
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-gray-100 py-3 px-5 rounded-xl font-medium hover:-translate-y-0.5 hover:shadow-md duration-300 cursor-pointer"
+          >
             Download CV
-          </button>
+          </a>
         </div>
       </div>
     </header>

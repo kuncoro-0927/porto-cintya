@@ -102,7 +102,7 @@ const useWorkExperiences = () => {
   return {
     workExperiences,
     loading,
-    getWorkExperiences,
+    getWorkExperiences: fetchWorkExperiences,
     tableScrollRef,
     trackRef,
     thumbRef,

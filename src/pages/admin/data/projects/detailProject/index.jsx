@@ -45,12 +45,7 @@ const DetailProject = ({ onClose, project }) => {
               ))}
             </ul>
           </div>
-          <p className="bg-linear-to-r font-medium from-biru to-hijau bg-clip-text text-transparent">
-            Description Lanjutan (Opsional): <br />
-            <span className="text-[#6c6c6c] font-normal">
-              {project.description_2 || "Tidak ada"}
-            </span>
-          </p>
+
           <p className="bg-linear-to-r font-medium from-biru to-hijau bg-clip-text text-transparent">
             Software: <br />
             <span className="text-[#6c6c6c] font-normal">
@@ -64,7 +59,11 @@ const DetailProject = ({ onClose, project }) => {
             </p>
 
             {project.image_url && (
-              <img src={project.image_url} alt={project.title} />
+              <img
+                src={project.image_url}
+                className="rounded-lg"
+                alt={project.title}
+              />
             )}
           </div>
         </div>

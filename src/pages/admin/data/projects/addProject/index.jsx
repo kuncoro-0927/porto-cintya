@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../../../../lib/supabaseClient";
+import { toast } from "react-toastify";
 const AddProjectModal = ({ onClose, onSuccess }) => {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -28,12 +29,12 @@ const AddProjectModal = ({ onClose, onSuccess }) => {
     e.preventDefault();
 
     if (!imageFile) {
-      alert("Pilih gambar terlebih dahulu");
+      toast.error("huahaha, pilih gambar dulu KOCAK");
       return;
     }
 
-    if (imageFile && imageFile.size > 2 * 1024 * 1024) {
-      alert("Ukuran gambar maksimal 2 MB");
+    if (imageFile && imageFile.size > 500 * 1024) {
+      toast.error("HUAHAHA, max 500 kb aja");
       return;
     }
     setUploading(true);
@@ -87,9 +88,10 @@ const AddProjectModal = ({ onClose, onSuccess }) => {
       onSuccess();
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       setUploading(false);
+      toast.success("slmt, udah nambah y. mks");
     }
   };
 
@@ -277,8 +279,8 @@ Description 3: etc..`}
             />
 
             <p id="bullets-info" className="text-xs text-gray-500">
-              ini penting nih, kl deskripsi nya ada bbrp paragraf, tolong beda baris y, mks (pake
-              enter! biar beda baris)
+              ini penting nih, kl deskripsi nya ada bbrp paragraf, tolong beda
+              baris y, mks (pake enter! biar beda baris)
             </p>
           </div>
 
@@ -306,7 +308,7 @@ Description 3: etc..`}
             />
 
             <p id="title-info" className="text-xs  text-gray-500">
-              nah ini yg terakhir gambar project - max 2 mb ya jgn gede"
+              nah ini yg terakhir gambar project - max 500 kb ya jgn gede"
               ukurannya
             </p>
 

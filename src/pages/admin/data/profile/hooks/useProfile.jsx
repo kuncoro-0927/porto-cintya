@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../../../lib/supabaseClient";
 import { getProfile } from "../../../../../services/supabaseService";
+import { toast } from "react-toastify";
 const useProfile = () => {
   const [profile, setProfile] = useState(null);
 
@@ -65,8 +66,8 @@ const useProfile = () => {
 
     if (!file) return;
 
-    if (file.size > 2 * 1024 * 1024) {
-      alert("Ukuran gambar maksimal 2 MB");
+    if (file.size > 500 * 1024) {
+      alert("HUAHAHA, MAX 500 KB AJAH");
       return;
     }
 
@@ -80,12 +81,12 @@ const useProfile = () => {
     if (!file) return;
 
     if (file.type !== "application/pdf") {
-      alert("CV harus berupa file PDF");
+      toast.error("CV harus berupa file PDF");
       return;
     }
 
     if (file.size > 2 * 1024 * 1024) {
-      alert("Ukuran CV maksimal 2 MB");
+      toast.error("Ukuran CV maksimal 2 MB");
       return;
     }
 
@@ -161,10 +162,10 @@ const useProfile = () => {
       setImageFile(null);
       setCvFile(null);
 
-      alert("Profile berhasil disimpan");
+      toast.success("profil udah ke simpen y, mks");
     } catch (error) {
       console.error("Error save profile:", error);
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       setSaving(false);
     }

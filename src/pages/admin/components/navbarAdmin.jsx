@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import profile_img from "../../../assets/images/profile-cintya.jpeg";
 import { Link } from "react-router-dom";
-import { getProfile } from "../../../services/supabaseService";
+import useProfile from "../data/profile/hooks/useProfile";
 import { supabase } from "../../../lib/supabaseClient";
 const NavbarAdmin = ({ setActiveSection }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const { profile, loading } = useProfile();
   const handleSelect = (section) => {
     setActiveSection(section);
     setMenuOpen(false);
@@ -25,17 +25,6 @@ const NavbarAdmin = ({ setActiveSection }) => {
 
     navigate("/admin/login");
   };
-
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const data = await getProfile();
-      setProfile(data);
-    };
-
-    fetchProfile();
-  }, []);
 
   return (
     <nav className="relative lg:px-20 xl:py-5 2xl:px-44 px-4 sm:px-20 py-4 flex items-center justify-between">
@@ -75,11 +64,13 @@ const NavbarAdmin = ({ setActiveSection }) => {
           onClick={() => setMenuOpen(!menuOpen)}
           className="h-10 w-10 cursor-pointer"
         >
-          <img
-            className="h-full w-full object-cover rounded-lg"
-            src={profile?.image_url || profile_img}
-            alt={profile?.name || ""}
-          />
+          {!loading && (
+            <img
+              className="h-full w-full object-cover rounded-lg"
+              src={profile?.image_url || profile_img}
+              alt={profile?.name || ""}
+            />
+          )}
         </div>
       </div>
 

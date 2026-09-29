@@ -6,10 +6,10 @@ import DataProject from "../data/projects";
 import DataWorkExperiences from "../data/work-experiences";
 import profile_img from "../../../assets/images/profile-cintya.jpeg";
 import {
-  getProfile,
   getProjects,
   getWorkExperiences,
 } from "../../../services/supabaseService";
+import useProfile from "../data/profile/hooks/useProfile";
 import StorageUsage from "../components/storageUsage";
 const Admin = () => {
   const [activeSection, setActiveSection] = useState(
@@ -18,6 +18,7 @@ const Admin = () => {
   const [sectionLoading, setSectionLoading] = useState(false);
   const [totalProjects, setTotalProjects] = useState(0);
   const [totalExperiences, setTotalExperiences] = useState(0);
+  const { profile, loading } = useProfile();
   const handleSectionChange = (section) => {
     if (section === activeSection) return;
 
@@ -25,17 +26,6 @@ const Admin = () => {
     setActiveSection(section);
     localStorage.setItem("adminSection", section);
   };
-
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const data = await getProfile();
-      setProfile(data);
-    };
-
-    fetchProfile();
-  }, []);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -50,6 +40,7 @@ const Admin = () => {
 
     fetchStats();
   }, []);
+
   return (
     <div className="bg-gray-200/60 min-h-screen">
       <NavbarAdmin setActiveSection={handleSectionChange} />
@@ -67,12 +58,13 @@ const Admin = () => {
             {/* kiri */}
             <div className="flex flex-col gap-6 lg:max-w-xl xl:max-w-3xl w-full">
               <div className="block lg:hidden relative h-[400px] object-cover overflow-hidden rounded-xl">
-                <img
-                  className="w-full h-full object-cover"
-                  src={profile?.image_url || profile_img}
-                  alt={profile?.name || ""}
-                />
-
+                {!loading && (
+                  <img
+                    className="w-full h-full object-cover"
+                    src={profile?.image_url || profile_img}
+                    alt={profile?.name || ""}
+                  />
+                )}
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
                 <ProfileLink
                   to="/admin/profile"
@@ -130,11 +122,13 @@ const Admin = () => {
             <div className="relative w-full">
               <div className="lg:absolute inset-0 flex flex-col gap-6">
                 <div className="hidden lg:block lg:relative lg:flex-1 min-h-0 overflow-hidden rounded-xl">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={profile?.image_url || profile_img}
-                    alt={profile?.name || ""}
-                  />
+                  {!loading && (
+                    <img
+                      className="w-full h-full object-cover"
+                      src={profile?.image_url || profile_img}
+                      alt={profile?.name || ""}
+                    />
+                  )}
 
                   <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
                   <ProfileLink

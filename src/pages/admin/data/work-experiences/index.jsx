@@ -166,9 +166,9 @@ const DataWorkExperiences = ({ onLoadingChange }) => {
       {showModal && (
         <AddWorkExperienceModal
           onClose={() => setShowModal(false)}
-          onSuccess={() => {
+          onSuccess={async () => {
+            await getWorkExperiences();
             setShowModal(false);
-            getWorkExperiences();
           }}
         />
       )}

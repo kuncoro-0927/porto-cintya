@@ -33,3 +33,20 @@ export async function getProfile() {
 
   return data;
 }
+
+export async function getProjectBySlug(slug) {
+  const { data, error } = await supabase
+    .from("projects")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+
+  console.log("DATA PROJECT DETAIL:", data);
+  console.log("ERROR PROJECT DETAIL:", error);
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}

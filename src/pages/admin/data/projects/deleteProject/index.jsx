@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../../../../lib/supabaseClient";
+import { toast } from "react-toastify";
 const DeleteProject = ({ project, onClose, onSuccess }) => {
   const [deleting, setDeleting] = useState(false);
 
@@ -19,9 +20,10 @@ const DeleteProject = ({ project, onClose, onSuccess }) => {
       onSuccess();
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       setDeleting(false);
+      toast.success("SELAMAT, UDAH KE HAPUS YA!")
     }
   };
   return (

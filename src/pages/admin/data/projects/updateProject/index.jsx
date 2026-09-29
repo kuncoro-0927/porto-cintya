@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../../../../lib/supabaseClient";
+import { toast } from "react-toastify";
 const UpdateProject = ({ project, onSuccess, onClose }) => {
   const [form, setForm] = useState({
     category: project.category || "",
@@ -53,8 +54,8 @@ const UpdateProject = ({ project, onSuccess, onClose }) => {
         imageUrl = publicUrlData.publicUrl;
       }
 
-      if (imageFile && imageFile.size > 2 * 1024 * 1024) {
-        alert("Ukuran gambar maksimal 2 MB");
+      if (imageFile && imageFile.size > 500 * 1024) {
+        toast.error("MAX 500 KB KOCAK");
         return;
       }
 
@@ -91,9 +92,10 @@ const UpdateProject = ({ project, onSuccess, onClose }) => {
       onSuccess();
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
+      toast.success("slmt, udah ke update y. mks")
     }
   };
   return (
@@ -279,8 +281,8 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
             />
 
             <p id="bullets-info" className="text-xs text-gray-500">
-              ini penting nih, kl deskripsinya ada bbpr paragraf, tolong beda baris y, mks (pake
-              enter! biar beda baris)
+              ini penting nih, kl deskripsinya ada bbpr paragraf, tolong beda
+              baris y, mks (pake enter! biar beda baris)
             </p>
           </div>
 

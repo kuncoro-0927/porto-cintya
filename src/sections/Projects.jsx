@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import CardProject from "../components/CardProject";
-import { NavLink } from "react-router-dom";
 import defaultProjects from "../data/dataProject";
 import { getProjects } from "../services/supabaseService";
 import logoR from "../assets/images/software/Rlogo.svg";
@@ -86,10 +85,10 @@ const Projects = () => {
                   setActiveCategory(cat);
                   setShowAllMobile(false);
                 }}
-                className={`flex items-center gap-2 py-3 px-5 rounded-xl font-medium shrink-0 transition-colors ${
+                className={`flex items-center gap-2 py-3 px-5 rounded-xl font-medium shrink-0 ${
                   activeCategory === cat
-                    ? "bg-black text-white"
-                    : "bg-gray-100 text-black"
+                    ? "bg-black text-white hover:-translate-y-0.5 hover:shadow-md duration-300 cursor-pointer"
+                    : "bg-gray-100 text-black hover:-translate-y-0.5 hover:shadow-md duration-300 cursor-pointer"
                 }`}
               >
                 {cat}
@@ -116,18 +115,15 @@ const Projects = () => {
         <div className="md:hidden px-6 sm:px-20">
           <div className="flex flex-col gap-3">
             {mobileProjects.map((project) => (
-              <NavLink
-                key={project.id}
-                to={`/project/${project.slug}`}
-                className="w-full"
-              >
+              <div key={project.id} className="w-full">
                 <CardProject
                   title={project.title}
                   year={project.year}
                   software={project.software}
                   image={project.image_url || project.image}
+                  slug={project.slug}
                 />
-              </NavLink>
+              </div>
             ))}
           </div>
 
@@ -150,9 +146,8 @@ const Projects = () => {
               className="flex items-stretch gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
             >
               {filteredProjects.map((project) => (
-                <NavLink
+                <div
                   key={project.id}
-                  to={`/project/${project.slug}`}
                   className="snap-start shrink-0 md:w-[calc((100%-1.5rem)/1.5)] lg:w-[calc((100%-1.5rem)/3)]"
                 >
                   <CardProject
@@ -160,8 +155,9 @@ const Projects = () => {
                     year={project.year}
                     software={project.software}
                     image={project.image_url || project.image}
+                    slug={project.slug}
                   />
-                </NavLink>
+                </div>
               ))}
             </div>
 

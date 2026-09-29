@@ -3,9 +3,10 @@ import { FaLinkedin } from "react-icons/fa";
 import CardExperience from "../components/CardExperience";
 import { experiences } from "../data/dataWorkExperience";
 import { getWorkExperiences } from "../services/supabaseService";
+import useProfile from "../pages/admin/data/profile/hooks/useProfile";
 const WorkExperiences = () => {
   const [workexperience, setWorkExperience] = useState(experiences);
-
+  const { profile } = useProfile();
   useEffect(() => {
     async function fetchProjects() {
       const data = await getWorkExperiences();
@@ -28,9 +29,13 @@ const WorkExperiences = () => {
         <h2 className="text-3xl lg:text-4xl font-medium max-w-2xl mt-5 text-left">
           Lorem ipsum dolor, sit amet consectetur adipisicing.
         </h2>
-        <button className="flex items-center gap-2 bg-white py-3 px-5 font-medium rounded-xl text-black mt-6">
+        <a
+          href={profile?.linkedin || ""}
+          target="_blank"
+          className="flex items-center w-fit gap-2 bg-white py-3 px-5 font-medium rounded-xl text-black mt-6 hover:-translate-y-0.5 hover:shadow-md duration-300"
+        >
           <FaLinkedin className="text-xl" /> Connect with me
-        </button>
+        </a>
       </div>
 
       <div className="flex flex-col gap-6">

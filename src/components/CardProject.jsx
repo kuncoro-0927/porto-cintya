@@ -1,4 +1,5 @@
-const CardProject = ({ image, title, year, software }) => {
+import { Link } from "react-router-dom";
+const CardProject = ({ image, title, year, software, slug }) => {
   return (
     <div className="bg-[#eeeeee] flex flex-col justify-between items-start rounded-4xl p-5 w-full h-full lg:max-w-lg">
       <div className="flex flex-col">
@@ -17,9 +18,14 @@ const CardProject = ({ image, title, year, software }) => {
             <span className="text-black line-clamp-1">{software}</span>
           </div>
         </div>
-        <button className="py-3 rounded-2xl bg-black text-white w-full mt-16">
-          View details
-        </button>
+        <div className=" w-full mt-16">
+          <Link
+            to={`/project/${slug}`}
+            className="py-3 rounded-2xl bg-black text-white w-full flex justify-center items-center hover:-translate-y-0.5 hover:shadow-md duration-300"
+          >
+            View details
+          </Link>
+        </div>
       </div>
     </div>
   );

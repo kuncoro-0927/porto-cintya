@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../../../../lib/supabaseClient";
+import { toast } from "react-toastify";
 const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -27,12 +28,12 @@ const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
     e.preventDefault();
 
     if (!imageFile) {
-      alert("Pilih gambar terlebih dahulu");
+      toast.error("PILIH GAMBAR DULU KOCAK");
       return;
     }
 
     if (imageFile && imageFile.size > 100 * 1024) {
-      alert("Ukuran gambar maksimal 100 KB");
+      toast.error("GAMBAR MAX 100 KB AJA KOCAK");
       return;
     }
 
@@ -66,8 +67,8 @@ const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
           category: form.category,
           role: form.role,
           company: form.company,
-          start_date: "",
-          end_date: "",
+          start_date: form.start_date,
+          end_date: form.end_date,
           bullets: bullets,
           logo_url: imageUrl,
         },
@@ -80,9 +81,10 @@ const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
       onSuccess();
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       setUploading(false);
+      toast.success("slmt, udah nambah y. mks");
     }
   };
 
@@ -115,6 +117,7 @@ const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
               placeholder="Contoh: Internship or Contract"
               value={form.category}
               onChange={handleChange}
+              required
               aria-describedby="title-info"
               className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
       focus:border-transparent
@@ -134,6 +137,7 @@ const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
             <input
               id="role"
               name="role"
+              required
               placeholder="Contoh: Payment System Policy & Oversight (TIKSPPUR)"
               value={form.role}
               onChange={handleChange}
@@ -158,6 +162,7 @@ const AddWorkExperienceModal = ({ onClose, onSuccess }) => {
               placeholder="Contoh: KPw Bank Indonesia Provinsi Jawa Tengah"
               value={form.company}
               onChange={handleChange}
+              required
               aria-describedby="company-info"
               className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
       focus:border-transparent
@@ -247,6 +252,7 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
               value={form.bullets}
               onChange={handleChange}
               rows="6"
+              required
               aria-describedby="description-01-info"
               className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
       focus:border-transparent
@@ -287,7 +293,7 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
             </p>
 
             {imagePreview && (
-              <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 w-full max-w-[350px] mx-auto h-full">
+              <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 w-full max-w-20  mx-auto h-full">
                 <img
                   src={imagePreview}
                   alt="Preview"

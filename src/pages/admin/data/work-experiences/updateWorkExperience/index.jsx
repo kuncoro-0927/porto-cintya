@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../../../../lib/supabaseClient";
+import { toast } from "react-toastify";
 const UpdateWorkExperience = ({ workExperience, onSuccess, onClose }) => {
   const [form, setForm] = useState({
     category: workExperience.category || "",
@@ -52,7 +53,7 @@ const UpdateWorkExperience = ({ workExperience, onSuccess, onClose }) => {
       }
 
       if (imageFile && imageFile.size > 100 * 1024) {
-        alert("Ukuran gambar maksimal 100 KB");
+        toast.error("MAX 100 KB AJA KOCAK");
         return;
       }
       const bullets = form.bullets
@@ -81,9 +82,10 @@ const UpdateWorkExperience = ({ workExperience, onSuccess, onClose }) => {
       onSuccess();
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
+      toast.success("slmt, udah ke update y. mks")
     }
   };
   return (
@@ -287,7 +289,7 @@ Job Description2: Identified high-potential destinations for QRIS Jelajah Indone
             </p>
 
             {imagePreview && (
-              <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 w-full max-w-[350px] mx-auto h-full">
+              <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 w-full  max-w-20 mx-auto h-full">
                 <img
                   src={imagePreview}
                   alt="Preview"
