@@ -82,7 +82,7 @@ const Projects = () => {
           <div className="border border-amber-800 text-amber-800 rounded-full px-4 py-2 w-fit">
             Projects
           </div>
-          <h2 className="text-2xl lg:text-4xl font-medium max-w-3xl mt-5 text-left">
+          <h2 className="text-3xl lg:text-4xl font-medium max-w-3xl mt-5 text-left">
             Explore projects that turn data into meaningful insights.
           </h2>
           <div className="flex items-center gap-3 mt-6 flex-wrap">

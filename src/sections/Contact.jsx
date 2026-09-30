@@ -14,7 +14,7 @@ const Contact = () => {
         <div className="border border-amber-800 text-amber-800 rounded-full px-4 py-2 w-fit">
           Get in Touch
         </div>
-        <h2 className="text-4xl font-medium lg:max-w-md mt-5 text-left">
+        <h2 className="text-3xl lg:text-4xl font-medium lg:max-w-md mt-5 text-left">
           I’m always open to new ideas, collaborations, or a simple conversation
         </h2>
       </div>
