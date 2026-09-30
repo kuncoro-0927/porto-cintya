@@ -100,7 +100,7 @@ const UpdateProject = ({ project, onSuccess, onClose }) => {
   };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-5">
-      <div className="w-full max-w-2xl max-h-[calc(100vh-40px)] overflow-y-auto bg-white rounded-2xl p-6 scrollbar-hide">
+      <div className="w-full max-w-2xl  max-h-[calc(100dvh-40px)] overflow-y-auto bg-white rounded-2xl p-6 scrollbar-hide">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-lg font-semibold">Update Project</h2>
 
