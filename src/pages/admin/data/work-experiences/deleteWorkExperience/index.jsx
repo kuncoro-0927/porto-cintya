@@ -23,12 +23,12 @@ const DeleteWorkExperience = ({ workExperience, onClose, onSuccess }) => {
       toast.error(error.message);
     } finally {
       setDeleting(false);
-      toast.success("SELAMAT, UDAH KE HAPUS!")
+      toast.success("SELAMAT, UDAH KE HAPUS!");
     }
   };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-5">
-      <div className="w-full max-w-md max-h-[90vh] overflow-y-auto bg-white rounded-2xl p-6 scrollbar-hide">
+      <div className="w-full max-w-md max-h-[calc(100vh-40px)] overflow-y-auto bg-white rounded-2xl p-6 scrollbar-hide">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-lg font-semibold">Hapus Experience</h2>
 
@@ -44,7 +44,7 @@ const DeleteWorkExperience = ({ workExperience, onClose, onSuccess }) => {
           <p className=" font-medium text-sm text-left flex flex-col gap-1 justify-center">
             yakin con enih mau dihapus? <br />
             <span className="text-[#6c6c6c] font-normal text-sm">
-             yauda sih kl mau dihps, tp gbs dibalikin lgi, mks
+              yauda sih kl mau dihps, tp gbs dibalikin lgi, mks
             </span>
           </p>
 
