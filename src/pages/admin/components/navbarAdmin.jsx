@@ -140,7 +140,7 @@ const NavbarAdmin = ({ setActiveSection }) => {
               <div className="flex flex-col text-sm">
                 <span className="font-medium">Cintya Kusuma</span>
                 <span className="text-xs text-[#6c6c6c]">
-                  cintyakusuma@gmail.com
+                  blewah-ljubana@gmail.com
                 </span>
               </div>
             </div>
