@@ -24,6 +24,18 @@ const DataWorkExperiences = ({ onLoadingChange }) => {
     }
   }, [loading, onLoadingChange]);
 
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showModal]);
+
   return (
     <div className="w-full p-6 bg-white rounded-xl">
       <div className="flex flex-col gap-4">
