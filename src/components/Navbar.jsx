@@ -84,7 +84,7 @@ const Navbar = () => {
   const navLinks = [
     { href: "#about", label: "About", icon: FiUser },
     { href: "#projects", label: "Projects", icon: FiEdit3 },
-    { href: "#experiences", label: "Experiences", icon: FiBookOpen },
+    { href: "#work-experiences", label: "Experiences", icon: FiBookOpen },
     { href: "#contact", label: "Contact", icon: FiHome },
   ];
 
