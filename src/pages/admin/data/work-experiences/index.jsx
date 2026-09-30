@@ -15,6 +15,7 @@ const DataWorkExperiences = ({ onLoadingChange }) => {
     thumbRef,
   } = useWorkExperiences();
   const [showModal, setShowModal] = useState(false);
+  const isAnyModalOpen = showModal || actionModal !== null;
   const [selectedWorkExperience, setSelectedWorkExperience] = useState(null);
   const [actionModal, setActionModal] = useState(null);
 
@@ -25,17 +26,26 @@ const DataWorkExperiences = ({ onLoadingChange }) => {
   }, [loading, onLoadingChange]);
 
   useEffect(() => {
-    if (showModal) {
+    if (isAnyModalOpen) {
+      const scrollY = window.scrollY;
+
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+
+      return () => {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.style.overflow = "";
+
+        window.scrollTo(0, scrollY);
+      };
     }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [showModal]);
-
+  }, [isAnyModalOpen]);
   return (
     <div className="w-full p-6 bg-white rounded-xl">
       <div className="flex flex-col gap-4">
