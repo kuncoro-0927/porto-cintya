@@ -197,12 +197,12 @@ const AddProjectModal = ({ onClose, onSuccess }) => {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="title" className="text-sm font-medium">
+            <label htmlFor="subtitle" className="text-sm font-medium">
               Event
             </label>
 
             <input
-              name="event"
+              name="subtitle"
               required
               placeholder="Contoh: Project of CodingCampby DBS Foundation 2025"
               value={form.subtitle}
@@ -213,7 +213,7 @@ const AddProjectModal = ({ onClose, onSuccess }) => {
       focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
             />
 
-            <p id="title-info" className="text-xs text-gray-500">
+            <p id="subtitle-info" className="text-xs text-gray-500">
               yang ini event, kaya.. ya event aja, misal event apa gt
             </p>
           </div>
