@@ -79,30 +79,30 @@ const DetailProject = () => {
         </div>
 
         <div className="mt-20 flex flex-col-reverse lg:flex-row gap-10 lg:gap-28 items-start">
-          <div className="max-w-sm flex flex-col gap-2  w-full shrink-0">
+          <div className="max-w-sm flex flex-col gap-3  w-full shrink-0">
             <div className="flex flex-col">
               <span className="font-medium">Event</span>
-              <span className=" font-medium text-[#6c6c6c]">
+              <span className=" text-[#6c6c6c]">
                 {project.subtitle}
               </span>
             </div>
             <div className="flex flex-col">
-              <span className="font-medium">Tahun</span>
-              <span className="whitespace-nowrap font-medium text-[#6c6c6c]">
+              <span className="font-medium">Project Date</span>
+              <span className="whitespace-nowrap text-[#6c6c6c]">
                 {project.year}
               </span>
             </div>
 
             <div className="flex flex-col">
-              <span className="font-medium">Kategori</span>
-              <span className="whitespace-nowrap font-medium text-[#6c6c6c]">
+              <span className="font-medium">Category</span>
+              <span className="whitespace-nowrap  text-[#6c6c6c]">
                 {project.category}
               </span>
             </div>
 
             <div className="flex flex-col">
-              <span className="font-medium">Software</span>
-              <span className="whitespace-nowrap font-medium text-[#6c6c6c]">
+              <span className="font-medium">Tools & Technologies</span>
+              <span className="whitespace-nowrap text-[#6c6c6c]">
                 {project.software}
               </span>
             </div>
@@ -113,7 +113,7 @@ const DetailProject = () => {
             </span>
             <div className="mt-3">
               {project.bullets?.length > 0 && (
-                <ul className="text-[#6c6c6c] font-medium">
+                <ul className="text-[#6c6c6c] ">
                   {project.bullets.map((bullet, index) => (
                     <li className="mt-2" key={index}>
                       {bullet}

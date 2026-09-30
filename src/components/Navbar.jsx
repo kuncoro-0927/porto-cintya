@@ -127,7 +127,7 @@ const Navbar = () => {
               Projects
             </a>
             <a
-              href="#experiences"
+              href="#work-experiences"
               className="transition duration-300 hover:opacity-60"
             >
               Experiences
@@ -143,9 +143,14 @@ const Navbar = () => {
 
         {/* Contact desktop */}
         <div className="hidden lg:flex text-right">
-          <button className="rounded-xl bg-black p-2.5 text-white transition duration-300 hover:scale-105">
+          <a
+            href={profile?.email ? `mailto:${profile.email}` : "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-xl bg-black p-2.5 text-white transition duration-300 hover:scale-105"
+          >
             <CiMail className="text-2xl" />
-          </button>
+          </a>
         </div>
 
         {/* Button menu mobile */}
@@ -186,14 +191,17 @@ const Navbar = () => {
                   );
                 })}
 
-                <button
+                <a
+                  href={profile?.email ? `mailto:${profile.email}` : "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   ref={(el) => (itemsRef.current[navLinks.length] = el)}
                   onClick={closeMenu}
                   style={{ opacity: 0 }}
                   className="mt-1 flex items-center justify-center gap-2 rounded-2xl bg-gray-100 p-4 text-base font-semibold text-black transition duration-300 hover:bg-gray-200"
                 >
                   Email Me
-                </button>
+                </a>
               </div>
             </div>
           )}

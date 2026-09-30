@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import CardProject from "../components/CardProject";
-import defaultProjects from "../data/dataProject";
-import { getProjects } from "../services/supabaseService";
 import logoR from "../assets/images/software/Rlogo.svg";
 import logoPython from "../assets/images/software/Python-logo-notext.svg";
 import logoTableau from "../assets/images/software/Tableau Icon - Colored - zonalogo.com.svg";
@@ -9,7 +7,8 @@ import logoSql from "../assets/images/software/mysql.svg";
 import logoBI from "../assets/images/software/New_Power_BI_Logo.svg";
 import logoExcel from "../assets/images/software/Microsoft Excel Logo - Colored - zonalogo.com.svg";
 import logoPP from "../assets/images/software/Microsoft PowerPoint Logo - Colored - zonalogo.com.svg";
-
+import useProjects from "../pages/admin/data/projects/hooks/useProjects";
+import getProjectDate from "../services/projectDate";
 const categories = ["Data Analysis", "Dashboard", "Infographics"];
 const MOBILE_INITIAL_COUNT = 3;
 
@@ -18,7 +17,8 @@ const Projects = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [showAllMobile, setShowAllMobile] = useState(false);
-  const [projects, setProjects] = useState(defaultProjects);
+
+  const { projects, loading } = useProjects();
 
   const scrollRef = useRef(null);
 
@@ -34,7 +34,9 @@ const Projects = () => {
 
   const checkScroll = () => {
     const el = scrollRef.current;
+
     if (!el) return;
+
     setCanScrollLeft(el.scrollLeft > 0);
     setCanScrollRight(
       Math.ceil(el.scrollLeft + el.clientWidth) < el.scrollWidth,
@@ -43,39 +45,45 @@ const Projects = () => {
 
   useEffect(() => {
     checkScroll();
-  }, [activeCategory]);
+  }, [activeCategory, projects]);
 
   const scrollToNext = () => {
     const el = scrollRef.current;
+
     if (!el) return;
-    el.scrollBy({ left: el.clientWidth, behavior: "smooth" });
+
+    el.scrollBy({
+      left: el.clientWidth,
+      behavior: "smooth",
+    });
   };
 
   const showNextButton = !canScrollLeft && canScrollRight;
 
-  useEffect(() => {
-    async function fetchProjects() {
-      const data = await getProjects();
-
-      console.log("HASIL DI PROJECTS:", data);
-
-      if (data.length > 0) {
-        setProjects(data);
-      }
-    }
-
-    fetchProjects();
-  }, []);
+  if (loading) {
+    return (
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
+        <div className="three-body">
+          <div className="three-body__dot"></div>
+          <div className="three-body__dot"></div>
+          <div className="three-body__dot"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <section className="py-20  lg:mt-0 lg:py-40 flex flex-col justify-center">
+    <section
+      id="projects"
+      className="py-20  lg:mt-0 lg:py-40 flex flex-col justify-center"
+    >
       <div className="flex justify-between items-end w-full px-5 sm:px-20 lg:px-20 2xl:px-40">
         <div className="justify-start items-start flex flex-col">
           <div className="border border-amber-800 text-amber-800 rounded-full px-4 py-2 w-fit">
             Projects
           </div>
           <h2 className="text-2xl lg:text-4xl font-medium max-w-3xl mt-5 text-left">
-            Lorem ipsum dolor, sit amet consectetur adipisicing.
+            Explore projects that turn data into meaningful insights.
           </h2>
           <div className="flex items-center gap-3 mt-6 flex-wrap">
             {categories.map((cat) => (
@@ -145,20 +153,22 @@ const Projects = () => {
               onScroll={checkScroll}
               className="flex items-stretch gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
             >
-              {filteredProjects.map((project) => (
-                <div
-                  key={project.id}
-                  className="snap-start shrink-0 md:w-[calc((100%-1.5rem)/1.5)] lg:w-[calc((100%-1.5rem)/3)]"
-                >
-                  <CardProject
-                    title={project.title}
-                    year={project.year}
-                    software={project.software}
-                    image={project.image_url || project.image}
-                    slug={project.slug}
-                  />
-                </div>
-              ))}
+              {[...filteredProjects]
+                .sort((a, b) => getProjectDate(b.year) - getProjectDate(a.year))
+                .map((project) => (
+                  <div
+                    key={project.id}
+                    className="snap-start shrink-0 md:w-[calc((100%-1.5rem)/1.5)] lg:w-[calc((100%-1.5rem)/3)]"
+                  >
+                    <CardProject
+                      title={project.title}
+                      year={project.year}
+                      software={project.software}
+                      image={project.image_url || project.image}
+                      slug={project.slug}
+                    />
+                  </div>
+                ))}
             </div>
 
             <div
@@ -181,7 +191,8 @@ const Projects = () => {
             Supporting software for my work
           </h2>
           <span className="max-w-xs text-[#6c6c6c]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, error!
+            Software and tools I use for data analysis, visualization, and
+            development.
           </span>
         </div>
 

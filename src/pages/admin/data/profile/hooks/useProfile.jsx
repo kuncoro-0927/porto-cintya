@@ -10,7 +10,7 @@ const useProfile = () => {
     name: "",
     bio: "",
     email: "",
-    phone: "",
+    github: "",
     linkedin: "",
     instagram: "",
   });
@@ -36,7 +36,7 @@ const useProfile = () => {
           name: data.name || "",
           bio: data.bio || "",
           email: data.email || "",
-          phone: data.phone || "",
+          github: data.github || "",
           linkedin: data.linkedin || "",
           instagram: data.instagram || "",
         });
@@ -129,7 +129,7 @@ const useProfile = () => {
         name: form.name,
         bio: form.bio,
         email: form.email,
-        phone: form.phone,
+        github: form.github,
         linkedin: form.linkedin,
         instagram: form.instagram,
         image_url: imageUrl,

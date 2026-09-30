@@ -181,6 +181,7 @@ const AddProjectModal = ({ onClose, onSuccess }) => {
             <input
               id="title"
               name="title"
+              required
               placeholder="Contoh: Content-Based Movie Recommendation Using TF-IDF and Cosine Similarity: An Analysis on the TMDB Dataset"
               value={form.title}
               onChange={handleChange}
@@ -197,11 +198,12 @@ const AddProjectModal = ({ onClose, onSuccess }) => {
 
           <div className="flex flex-col gap-1.5">
             <label htmlFor="title" className="text-sm font-medium">
-              Subtitle
+              Event
             </label>
 
             <input
-              name="subtitle"
+              name="event"
+              required
               placeholder="Contoh: Project of CodingCampby DBS Foundation 2025"
               value={form.subtitle}
               onChange={handleChange}
@@ -212,12 +214,12 @@ const AddProjectModal = ({ onClose, onSuccess }) => {
             />
 
             <p id="title-info" className="text-xs text-gray-500">
-              yang ini subtitle, kaya.. ya subtitle aja, misal event atau apa gt
+              yang ini event, kaya.. ya event aja, misal event apa gt
             </p>
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="title" className="text-sm font-medium">
+            <label htmlFor="year" className="text-sm font-medium">
               Year
             </label>
 
@@ -225,6 +227,7 @@ const AddProjectModal = ({ onClose, onSuccess }) => {
               name="year"
               placeholder="Contoh: March 2025"
               value={form.year}
+              required
               onChange={handleChange}
               aria-describedby="year-info"
               className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
@@ -232,18 +235,19 @@ const AddProjectModal = ({ onClose, onSuccess }) => {
       focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
             />
 
-            <p id="title-info" className="text-xs text-gray-500">
+            <p id="year-info" className="text-xs text-gray-500">
               ini diisi tahun doang atau sm bulan jg terserah
             </p>
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="title" className="text-sm font-medium">
+            <label htmlFor="software" className="text-sm font-medium">
               Software
             </label>
 
             <input
               name="software"
+              required
               placeholder="Contoh: VS Code, GoogleColabs - Python"
               value={form.software}
               onChange={handleChange}
@@ -253,7 +257,7 @@ const AddProjectModal = ({ onClose, onSuccess }) => {
       focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
             />
 
-            <p id="title-info" className="text-xs text-gray-500">
+            <p id="software-info" className="text-xs text-gray-500">
               enih sofwer atau tul yg dipake apa aja
             </p>
           </div>
@@ -272,6 +276,7 @@ Description 3: etc..`}
               value={form.bullets}
               onChange={handleChange}
               rows="6"
+              required
               aria-describedby="description-01-info"
               className="rounded-lg text-sm border border-gray-300 px-4 py-3 outline-none
       focus:border-transparent

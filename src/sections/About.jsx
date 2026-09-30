@@ -31,7 +31,10 @@ const About = () => {
   const experienceYears = calculateExperienceYears(workExperiences);
 
   return (
-    <section className="p-6 py-20 sm:p-20 lg:p-20 lg:py-40 2xl:px-40 flex flex-col lg:flex-row gap-3 items-stretch bg-gray-100 mt-20 lg:mt-0">
+    <section
+      id="about"
+      className="p-6 py-20 sm:p-20 lg:p-20 lg:py-40 2xl:px-40 flex flex-col lg:flex-row gap-3 items-stretch bg-gray-100 mt-20 lg:mt-0"
+    >
       <div className="flex flex-col justify-between w-full lg:max-w-sm bg-black text-white p-6 rounded-3xl shadow-2xl shadow-black">
         <div className="flex flex-col gap-3">
           {!loading && (
@@ -47,9 +50,9 @@ const About = () => {
             </p>
           )}
         </div>
-        <button className="py-3 mt-20 lg:mt-0 rounded-2xl bg-white font-medium text-black">
+        <a href="#work-experiences" className="py-3 mt-20 lg:mt-0 rounded-2xl flex justify-center items-center bg-white font-medium text-black hover:-translate-y-0.5 hover:shadow-md cursor-pointer duration-300">
           View My Experiences
-        </button>
+        </a>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         <div className="p-3 rounded-3xl shadow-xs bg-white">
@@ -58,7 +61,7 @@ const About = () => {
               <span className="text-6xl">{experienceYears || "1"}+</span>
             )}
 
-            <span className="text-[#6c6c6c]">years of experience</span>
+            <span className="text-[#6c6c6c]">Years of Experience</span>
           </div>
           <div className="flex border-b-[1.5px] border-gray-300 mx-2 my-2"></div>
           <div className="p-2 pb-10">
@@ -71,7 +74,7 @@ const About = () => {
         <div className="p-3 rounded-3xl shadow-xs bg-white">
           <div className="flex justify-between items-end p-2">
             <span className="text-6xl">17+</span>
-            <span className="text-[#6c6c6c]">achievments</span>
+            <span className="text-[#6c6c6c]">Achievments</span>
           </div>
           <div className="flex border-b-[1.5px] border-gray-300 mx-2 my-2"></div>
           <div className="p-2 pb-10">
@@ -87,7 +90,7 @@ const About = () => {
               <span className="text-6xl"> {projects?.length || 8}+</span>
             )}
 
-            <span className="text-[#6c6c6c]">projects</span>
+            <span className="text-[#6c6c6c]">Projects</span>
           </div>
           <div className="flex border-b-[1.5px] border-gray-300 mx-2 my-2"></div>
           <div className="p-2 pb-10">
@@ -100,7 +103,7 @@ const About = () => {
         <div className="p-3 rounded-3xl shadow-xs bg-white">
           <div className="flex justify-between items-end p-2">
             <span className="text-6xl">9+</span>
-            <span className="text-[#6c6c6c]">certified</span>
+            <span className="text-[#6c6c6c]">Certificates</span>
           </div>
           <div className="flex border-b-[1.5px] border-gray-300 mx-2 my-2"></div>
           <div className="p-2 pb-10">

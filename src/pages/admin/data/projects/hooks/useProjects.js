@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useRef, useState } from "react";
-import { supabase } from "../../../../../lib/supabaseClient";
+import { getProjects as getProjectsService } from "../../../../../services/supabaseService";
+
+import defaultProjects from "../../../../../data/dataProject";
 
 const useProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -11,23 +13,23 @@ const useProjects = () => {
   const thumbRef = useRef(null);
   const draggingRef = useRef(false);
 
-  // =========================
-  // GET PROJECTS
-  // =========================
   const getProjects = async () => {
-    const { data, error } = await supabase
-      .from("projects")
-      .select("*")
-      .order("created_at", { ascending: false });
+    setLoading(true);
 
-    if (error) {
+    try {
+      const data = await getProjectsService();
+
+      if (data?.length > 0) {
+        setProjects(data);
+      } else {
+        setProjects(defaultProjects);
+      }
+    } catch (error) {
       console.error("Error get projects:", error);
+      setProjects(defaultProjects);
+    } finally {
       setLoading(false);
-      return;
     }
-
-    setProjects(data || []);
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -99,26 +101,20 @@ const useProjects = () => {
     };
 
     thumb.addEventListener("pointerdown", handlePointerDown);
-
     thumb.addEventListener("pointermove", handlePointerMove);
-
     thumb.addEventListener("pointerup", handlePointerUp);
 
     scroll.addEventListener("scroll", updateThumb);
-
     window.addEventListener("resize", updateThumb);
 
     updateThumb();
 
     return () => {
       thumb.removeEventListener("pointerdown", handlePointerDown);
-
       thumb.removeEventListener("pointermove", handlePointerMove);
-
       thumb.removeEventListener("pointerup", handlePointerUp);
 
       scroll.removeEventListener("scroll", updateThumb);
-
       window.removeEventListener("resize", updateThumb);
     };
   }, [projects]);

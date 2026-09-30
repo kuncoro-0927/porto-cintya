@@ -7,6 +7,10 @@
   --color-hitam: #2c2c2c;
   --font-sans: "Geist", sans-serif;
 }
+
+html {
+  scroll-behavior: smooth;
+}
 .btn-gradient-border {
   position: relative;
   isolation: isolate;

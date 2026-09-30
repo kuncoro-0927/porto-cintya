@@ -148,41 +148,19 @@ const ProfileAdmin = () => {
             </div>
           </div>
 
-          {/* Contact */}
+          {/* SOSIAL MEDIA */}
           <div className="flex flex-col lg:flex-row  items-start gap-6 lg:gap-20 xl:gap-36 mt-10">
-            <div className="flex flex-col whitespace-nowrap w-full max-w-xs">
-              <span className="text-base lg:text-lg font-medium">Contact</span>
+            <div className="flex flex-col whitespace-nowrap w-full max-w-xs ">
+              <span className="text-base lg:text-lg font-medium ">
+                Sosial Media
+              </span>
               <span className="text-sm text-[#6c6c6c]">
-                kontak yg bisa dihubungi buat di porto jg
+                link akun linkedin n instagram
               </span>
             </div>
 
-            <div className="flex flex-col lg:flex-row items-start gap-3 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 items-start gap-3 w-full">
               {" "}
-              <div className="flex flex-col gap-1.5 w-full">
-                <label
-                  htmlFor="phone"
-                  className="text-sm font-medium text-gray-700"
-                >
-                  nomor hp
-                </label>
-
-                <input
-                  id="phone"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  placeholder="Contoh: 081930993022"
-                  aria-describedby="phone-info"
-                  className="rounded-lg text-sm border w-full border-gray-300 px-4 py-3 outline-none
-      focus:border-transparent
-      focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
-                />
-
-                <p id="phone-info" className="text-xs text-gray-500">
-                  nomor km
-                </p>
-              </div>
               <div className="flex flex-col gap-1.5 w-full">
                 <label
                   htmlFor="email"
@@ -193,6 +171,7 @@ const ProfileAdmin = () => {
 
                 <input
                   id="email"
+                  type="email"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
@@ -207,22 +186,6 @@ const ProfileAdmin = () => {
                   email km
                 </p>
               </div>
-            </div>
-          </div>
-
-          {/* SOSIAL MEDIA */}
-          <div className="flex flex-col lg:flex-row  items-start gap-6 lg:gap-20 xl:gap-36 mt-10">
-            <div className="flex flex-col whitespace-nowrap w-full max-w-xs ">
-              <span className="text-base lg:text-lg font-medium ">
-                Sosial Media
-              </span>
-              <span className="text-sm text-[#6c6c6c]">
-                link akun linkedin n instagram
-              </span>
-            </div>
-
-            <div className="flex flex-col lg:flex-row items-start gap-3 w-full">
-              {" "}
               <div className="flex flex-col gap-1.5 w-full">
                 <label
                   htmlFor="linkedin"
@@ -245,6 +208,30 @@ const ProfileAdmin = () => {
 
                 <p id="linkedin-info" className="text-xs text-gray-500">
                   link linkedin km
+                </p>
+              </div>
+              <div className="flex flex-col gap-1.5 w-full">
+                <label
+                  htmlFor="github"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  github 
+                </label>
+
+                <input
+                  id="github"
+                  name="github"
+                  value={form.github}
+                  onChange={handleChange}
+                  placeholder="Contoh: https://github.com/username"
+                  aria-describedby="phone-info"
+                  className="rounded-lg text-sm border w-full border-gray-300 px-4 py-3 outline-none
+      focus:border-transparent
+      focus:[background:linear-gradient(white,white)_padding-box,linear-gradient(to_right,var(--color-biru),var(--color-hijau))_border-box]"
+                />
+
+                <p id="github-info" className="text-xs text-gray-500">
+                  link github km
                 </p>
               </div>
               <div className="flex flex-col gap-1.5 w-full">

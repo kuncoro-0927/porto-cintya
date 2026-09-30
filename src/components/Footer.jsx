@@ -1,16 +1,19 @@
-import profile from "../assets/images/profile-cintya.jpeg";
-
+import profile_img from "../assets/images/profile-cintya.jpeg";
+import useProfile from "../pages/admin/data/profile/hooks/useProfile";
 const Footer = () => {
+  const { profile, loading } = useProfile();
   return (
     <footer className="px-6 sm:p-20 py-10 lg:p-20 2xl:px-40 flex flex-col  bg-black text-white">
       <div className="flex flex-col lg:flex-row items-stretch justify-between">
         <div>
           <div className="bg-white/20 p-1 w-fit rounded-md">
-            <img
-              className="w-16 h-16 object-cover rounded-md"
-              src={profile}
-              alt=""
-            />
+            {!loading && (
+              <img
+                className="w-16 h-16 object-cover rounded-md"
+                src={profile?.image_url || profile_img}
+                alt={profile?.name || ""}
+              />
+            )}
           </div>
           <h2 className="text-2xl font-medium max-w-xl mt-5 text-left">
             There’s more to me…
@@ -20,17 +23,42 @@ const Footer = () => {
             <span className="text-white text-lg">Graphic Designer,</span>{" "}
             combining analytical thinking with creativity through visual design.
           </p>
-          <button className="py-3 px-6 rounded-xl bg-white font-medium text-black mt-6">
-            View My Experiences
+          <button className="py-3 px-6 rounded-xl bg-white font-medium text-black mt-6 hover:-translate-y-0.5 hover:shadow-md duration-300 cursor-pointer">
+            View My Designs
           </button>
         </div>
 
         <div className="flex mt-10 lg:mt-0 flex-col justify-between  items-start gap-10">
           <ul className="flex flex-col lg:flex-row  items-start gap-3 lg:gap-6">
-            <li>About</li>
-            <li>Projects</li>
-            <li>Experiences</li>
-            <li>Contact</li>
+            <li>
+              <a href="#about" className="hover:text-yellow-500 duration-300 ">
+                About
+              </a>
+            </li>
+            <li>
+              <a
+                href="#projects"
+                className="hover:text-yellow-500 duration-300 "
+              >
+                Projects
+              </a>
+            </li>
+            <li>
+              <a
+                href="#work-experiences"
+                className="hover:text-yellow-500 duration-300 "
+              >
+                Experiences
+              </a>
+            </li>
+            <li>
+              <a
+                href="#contact"
+                className="hover:text-yellow-500 duration-300 "
+              >
+                Contact
+              </a>
+            </li>
           </ul>
         </div>
       </div>
