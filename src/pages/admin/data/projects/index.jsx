@@ -8,10 +8,10 @@ const DataProject = ({ onLoadingChange }) => {
   const { projects, loading, tableScrollRef, trackRef, thumbRef, getProjects } =
     useProjects();
   const [showModal, setShowModal] = useState(false);
-  const isAnyModalOpen = showModal || actionModal !== null;
   const [selectedProject, setSelectedProject] = useState(null);
   const [actionModal, setActionModal] = useState(null);
   const [activeCategory, setActiveCategory] = useState("Data Analysis");
+  const isAnyModalOpen = showModal || actionModal !== null;
   const filteredProjects = projects.filter(
     (project) => project.category === activeCategory,
   );

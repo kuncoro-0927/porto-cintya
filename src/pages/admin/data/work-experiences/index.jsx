@@ -15,10 +15,9 @@ const DataWorkExperiences = ({ onLoadingChange }) => {
     thumbRef,
   } = useWorkExperiences();
   const [showModal, setShowModal] = useState(false);
-  const isAnyModalOpen = showModal || actionModal !== null;
   const [selectedWorkExperience, setSelectedWorkExperience] = useState(null);
   const [actionModal, setActionModal] = useState(null);
-
+  const isAnyModalOpen = showModal || actionModal !== null;
   useEffect(() => {
     if (!loading) {
       onLoadingChange(false);
