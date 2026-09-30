@@ -58,7 +58,7 @@ const NavbarAdmin = ({ setActiveSection }) => {
       <div className="hidden lg:flex items-stretch gap-2">
         <div className="flex flex-col text-sm text-right ">
           <span className="font-medium">Cintya Kusuma</span>
-          <span className="text-xs text-[#6c6c6c]">cintyakusuma@gmail.com</span>
+          <span className="text-xs text-[#6c6c6c]">blewah-ljubana@gmail.com</span>
         </div>
         <div
           onClick={() => setMenuOpen(!menuOpen)}

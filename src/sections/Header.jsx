@@ -3,7 +3,10 @@ import useProfile from "../pages/admin/data/profile/hooks/useProfile";
 const Header = () => {
   const { profile } = useProfile();
   return (
-    <header id="header" className="px-6 mt-40 sm:px-20 lg:p-20 lg:mt-20 2xl:px-40">
+    <header
+      id="header"
+      className="px-6 mt-40 sm:px-20 lg:p-20 lg:mt-20 2xl:px-40"
+    >
       <div className=" flex flex-col gap-5 justify-center items-center text-center">
         <h1 className="font-semibold text-4xl lg:text-6xl max-w-4xl">
           <span className="text-[#6c6c6c] leading-tight">
@@ -28,7 +31,7 @@ const Header = () => {
 
           <a
             href={profile?.cv_url}
-            download
+            download="Cintya-Kusuma.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-gray-100 py-3 px-5 rounded-xl font-medium hover:-translate-y-0.5 hover:shadow-md duration-300 cursor-pointer"
