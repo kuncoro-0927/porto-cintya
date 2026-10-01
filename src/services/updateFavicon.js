@@ -1,7 +1,7 @@
 export const updateFavicon = (imageUrl, fallback = "/favicon.svg") => {
-  if (!imageUrl) {
-    const favicon = document.querySelector('link[rel="icon"]');
+  const favicon = document.querySelector('link[rel="icon"]');
 
+  if (!imageUrl) {
     if (favicon) {
       favicon.href = fallback;
     }
@@ -27,9 +27,13 @@ export const updateFavicon = (imageUrl, fallback = "/favicon.svg") => {
     const sx = (img.naturalWidth - cropSize) / 2;
     const sy = (img.naturalHeight - cropSize) / 2;
 
-    ctx.drawImage(img, sx, sy, cropSize, cropSize, 0, 0, size, size);
+    // Rounded / circular clipping
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.clip();
 
-    const favicon = document.querySelector('link[rel="icon"]');
+    ctx.drawImage(img, sx, sy, cropSize, cropSize, 0, 0, size, size);
 
     if (favicon) {
       favicon.href = canvas.toDataURL("image/png");
@@ -37,8 +41,6 @@ export const updateFavicon = (imageUrl, fallback = "/favicon.svg") => {
   };
 
   img.onerror = () => {
-    const favicon = document.querySelector('link[rel="icon"]');
-
     if (favicon) {
       favicon.href = fallback;
     }
