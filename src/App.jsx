@@ -12,7 +12,8 @@ import Navbar from "./components/Navbar";
 import SmoothScroll from "./components/SmoothScroll";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import useProfile from "./pages/admin/data/profile/hooks/useProfile";
+import { updateFavicon } from "./services/updateFavicon";
 // admin
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Login from "./pages/admin/auth/loginAdmin";
@@ -26,6 +27,12 @@ import {
 
 export default function App() {
   const [appLoading, setAppLoading] = useState(true);
+
+  const { profile } = useProfile();
+
+  useEffect(() => {
+    updateFavicon(profile?.image_url);
+  }, [profile?.image_url]);
 
   useEffect(() => {
     const initializeApp = async () => {
